@@ -1,0 +1,13 @@
+//import bootstrap customization file
+@import 'bootstrap';
+
+//import custom sass
+@import '_base.scss';
+
+//components
+@import './sidebar.scss';
+
+//pages
+@import './pages/home.scss';
+@import './pages/dashboard.scss';
+@import './pages/auth.scss';

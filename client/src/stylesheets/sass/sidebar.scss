@@ -1,0 +1,54 @@
+.sidebar-container {
+  height: 100vh;
+  background-color: #fff;
+  padding-left: 0px;
+}
+
+.sidebar-inner-container {
+  height: 100vh;
+}
+
+.sidebar-option {
+  font-size: 0.875rem; //14px
+  font-weight: 500;
+  color: #9aa4ca;
+}
+
+.sidebar-link {
+  color: #9aa4ca;
+}
+
+.sidebar-collapse {
+  padding-left: 32px;
+  border: none;
+}
+
+.sidebar-item {
+  border: none;
+  color: #9aa4ca;
+}
+
+.sidebar-icon-container {
+  width: 24px;
+  display: inline-block;
+}
+
+.logo {
+  width: 23%;
+}
+
+.name {
+  width: 70%;
+}
+
+.navbar-brand {
+  font-weight: 500;
+}
+
+.navbar-text {
+  font-weight: 500;
+}
+
+.dashboardnav {
+  background-color: #fff;
+}

@@ -1,0 +1,94 @@
+.dashboard-body-container {
+  background-color: #f1f5f9;
+  padding: 0 40px;
+  height: 100vh;
+}
+
+.dashboard-heading {
+  font-weight: 600;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.card-wrapper {
+  padding: 30px 20px;
+}
+
+.card-box {
+  box-shadow: 0px 12px 24px -4px rgba(145, 158, 171, 0.12),
+    0px 0px 2px 0px rgba(145, 158, 171, 0.2);
+  border-radius: 7px;
+  border: none;
+}
+
+.icon-container {
+  margin-right: 20px;
+  height: 2.875rem;
+  width: 2.875rem;
+  border-radius: 10px;
+
+  &-purple {
+    background: rgba(155, 81, 224, 0.1);
+  }
+
+  &-green {
+    background: rgba(33, 150, 83, 0.1);
+  }
+
+  &-blue {
+    background: rgba(54, 92, 245, 0.1);
+  }
+
+  &-orange {
+    background: rgba(242, 153, 74, 0.1);
+  }
+}
+
+.card-icon {
+  &-purple {
+    color: #9b51e0;
+  }
+
+  &-green {
+    color: #219653;
+  }
+
+  &-blue {
+    color: #365cf5;
+  }
+
+  &-orange {
+    color: #f2994a;
+  }
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a2142;
+  margin: 0 0 10px 0;
+}
+
+.card-number {
+  font-size: 1.5rem;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.card-bottom-percent {
+  color: #219653;
+  font-size: 14px;
+}
+
+.card-bottom-text {
+  color: #5d657b;
+  font-size: 14px;
+}
+
+.card-bottom-arrow-green {
+  color: #219653;
+}
+
+.card-bottom-wrapper {
+  margin-left: -5px;
+}
