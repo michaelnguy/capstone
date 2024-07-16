@@ -1,7 +1,15 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
 
 import { GuardRoute } from './util/AuthRoute';
 import { AuthProvider } from './context/auth';
+
+import { SelectedComponentProvider } from './context/selectedComponentContext';
 
 import Home from './pages/home';
 import Register from './pages/register';
@@ -9,21 +17,22 @@ import Login from './pages/login';
 import Dashboard from './pages/dashboard';
 
 import './stylesheets/App.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/app' element={<GuardRoute />}>
-            <Route exact path='/app' element={<Dashboard />} />
-          </Route>
-        </Routes>
-      </Router>
+      <SelectedComponentProvider>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/app/*' element={<GuardRoute />}>
+              <Route path='*' element={<Dashboard />} />
+            </Route>
+          </Routes>
+        </Router>
+      </SelectedComponentProvider>
     </AuthProvider>
   );
 }

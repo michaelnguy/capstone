@@ -3,6 +3,46 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const requireLogin = require('../middleware/requireLogin');
 const Post = mongoose.model('Post');
+const User = mongoose.model('User');
+const axios = require('axios');
+
+router.get('/fetch_ig', (req, res) => {
+  const authId = '6680fbfa1e5f0d1a742bbd0f';
+
+  const igUserId = '17841407394103172';
+  const igUsernameToFetch = 'bluebottle';
+  let accessToken =
+    'EAAOAVTxW8c8BOw0GXgrntZAFhKxAFmaoKSZBrV9AMDWRw698PuNsmZA6XnuQrSKy8Qflb0JGRZAMNkGlzjVtfZArTwDf4S5upKWBORepvcESikO5vkA5xZCZBBxZASaq4eBUWuvxypPfnArfJnB7BZAqg6ScD4g1FAamDbpJLaQQl1v6S4ivvH1Cgow7qFZABwOo4ZAMHuD2qedydbaiq2ilgZDZD';
+  const fbUrl = `https://graph.facebook.com/v20.0/${igUserId}?fields=business_discovery.username(${igUsernameToFetch}){followers_count,media_count,media{comments_count,like_count}}&access_token=${accessToken}`;
+
+  const today = new Date().toISOString().split('T')[0];
+
+  axios
+    .get(fbUrl)
+    .then(async (response) => {
+      const followers =
+        response['data']['business_discovery']['followers_count'];
+
+      try {
+        const user = await User.findOne({ _id: authId });
+        console.log(user);
+        if (user) {
+          user.followerCount.set(today, followers);
+          await user.save();
+        }
+        res.json({ response: response['data']['business_discovery'] });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Something went wrong' });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      res
+        .status(500)
+        .json({ error: 'Failed to fetch data from Instagram API' });
+    });
+});
 
 router.post('/createpost', requireLogin, (req, res) => {
   const { title, body, pic } = req.body;

@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-export default function DashboardNav({ title }) {
+export default function TopNavbar({ title }) {
   return (
     <Navbar expand='lg' className='dashboardnav'>
       <Container className='d-flex justify-content-end'>

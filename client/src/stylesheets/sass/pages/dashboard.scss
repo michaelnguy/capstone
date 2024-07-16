@@ -10,6 +10,10 @@
   padding-bottom: 30px;
 }
 
+.dashboard-content {
+  background-color: #f1f5f9;
+}
+
 .card-wrapper {
   padding: 30px 20px;
 }
@@ -42,6 +46,10 @@
   &-orange {
     background: rgba(242, 153, 74, 0.1);
   }
+
+  &-red {
+    background: rgba(213, 1, 0, 0.1);
+  }
 }
 
 .card-icon {
@@ -59,6 +67,10 @@
 
   &-orange {
     color: #f2994a;
+  }
+
+  &-red {
+    color: #d50100;
   }
 }
 

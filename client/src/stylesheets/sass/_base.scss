@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Rany';
+  src: local('Rany'), url(./sass/fonts/Rany/Rany.otf) format('opentype');
+  font-style: normal;
+}
+
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+.container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}

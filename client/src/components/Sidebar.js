@@ -6,8 +6,8 @@ import {
   Navbar,
   Dropdown,
   Collapse,
-  Button,
   ListGroup,
+  Col,
 } from 'react-bootstrap';
 import {
   FileEarmarkBarGraph,

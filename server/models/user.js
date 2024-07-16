@@ -5,6 +5,8 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  followerCount: { type: Map, of: String },
+  posts: [{ type: ObjectId, ref: 'Post' }],
 });
 
 mongoose.model('User', userSchema);
