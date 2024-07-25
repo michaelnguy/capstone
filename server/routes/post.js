@@ -6,6 +6,42 @@ const Post = mongoose.model('Post');
 const User = mongoose.model('User');
 const axios = require('axios');
 
+const dummyPosts = require('../dummyPosts');
+
+router.post('/create_dummy_data', requireLogin, async (req, res) => {
+  let dataToSend = [
+    'hello this is great',
+    '😂',
+    'dayum',
+    'Stop my favourite internet grandma follows you😭😭😭',
+    'Bro got a demo',
+    'You gonna pay for my therapy',
+    'What a horrible day to have vision',
+    '😂😂😂😂',
+  ];
+  res.json('hit route');
+  try {
+    const response = await axios.post('http://localhost:5000/predict', {
+      texts: dataToSend,
+    });
+
+    // Handle the response from the Flask server
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error making request to Flask server:', error);
+
+    // Handle the error
+    res.status(500).json({
+      message: 'Error sending data',
+      error: error.message,
+    });
+  }
+
+  // const post = new Post({ title, body, photo: pic, postedBy: req.user });
+});
+
+router.post('/get_sentiment', (req, res) => {});
+
 router.get('/fetch_ig', (req, res) => {
   const authId = '6680fbfa1e5f0d1a742bbd0f';
 
