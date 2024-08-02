@@ -9352,6 +9352,43 @@ h3, .h3 {
   padding-left: 0 !important;
   padding-right: 0 !important; }
 
+.lds-dual-ring-singlepiece {
+  display: inline-block;
+  width: 80px;
+  height: 80px; }
+
+.lds-dual-ring-filterbar {
+  width: 20px;
+  height: 20px; }
+
+.lds-dual-ring-filterbar:after {
+  content: ' ';
+  display: block;
+  width: 21px;
+  height: 21px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 4px solid #000;
+  border-color: #000 transparent #000 transparent;
+  animation: lds-dual-ring 1.2s linear infinite; }
+
+.lds-dual-ring-singlepiece:after {
+  content: ' ';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #000;
+  border-color: #000 transparent #000 transparent;
+  animation: lds-dual-ring 1.2s linear infinite; }
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 .sidebar-container {
   height: 100vh;
   background-color: #fff;
@@ -9715,6 +9752,12 @@ body {
     background: rgba(242, 153, 74, 0.1); }
   .icon-container-red {
     background: rgba(213, 1, 0, 0.1); }
+  .icon-container-teal {
+    background: rgba(0, 193, 248, 0.12); }
+  .icon-container-lime {
+    background: rgba(151, 202, 49, 0.12); }
+  .icon-container-light {
+    background: rgba(223, 229, 239, 0.5); }
 
 .card-icon-purple {
   color: #9b51e0; }
@@ -9730,6 +9773,15 @@ body {
 
 .card-icon-red {
   color: #d50100; }
+
+.card-icon-teal {
+  color: #00c1f8; }
+
+.card-icon-lime {
+  color: #97ca31; }
+
+.card-icon-light {
+  color: #1a2142; }
 
 .card-title {
   font-size: 1rem;
@@ -9787,3 +9839,52 @@ body {
   padding: 0.5rem 0;
   align-items: center;
   text-decoration: none; }
+
+/*    ////////////////////////////////////////    */
+/*    Start Sentiment Overview Styling Section    */
+/*    ////////////////////////////////////////    */
+.overview-card-box {
+  margin-bottom: 1rem; }
+
+.overview-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a2142;
+  margin: 0; }
+
+.section-outer-wrapper {
+  padding: 0 0.75rem; }
+
+.section-inner-wrapper {
+  background-color: white;
+  border-radius: 0.375rem; }
+
+.sentiment-body-container {
+  padding: 0 0.75rem; }
+
+.post-card-box {
+  box-shadow: 0px 12px 24px -4px rgba(145, 158, 171, 0.12), 0px 0px 2px 0px rgba(145, 158, 171, 0.2);
+  border-radius: 7px;
+  border: none;
+  display: inline-block; }
+
+.post-bold {
+  font-weight: 500; }
+
+.post-bottom-percent {
+  color: black;
+  font-size: 14px; }
+
+.post-body-container {
+  padding: 0 5rem 5rem;
+  background-color: #f1f5f9; }
+
+.single-post-button {
+  height: max-content;
+  border-radius: 5px; }
+
+.show-link {
+  color: blue;
+  font-weight: 400; }
+  .show-link:hover {
+    cursor: pointer; }

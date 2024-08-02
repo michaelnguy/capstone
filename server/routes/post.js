@@ -6,38 +6,70 @@ const Post = mongoose.model('Post');
 const User = mongoose.model('User');
 const axios = require('axios');
 
-const dummyPosts = require('../dummyPosts');
+const dummyPosts = require('../util/dummyPosts');
 
 router.post('/create_dummy_data', requireLogin, async (req, res) => {
-  let dataToSend = [
-    'hello this is great',
-    '😂',
-    'dayum',
-    'Stop my favourite internet grandma follows you😭😭😭',
-    'Bro got a demo',
-    'You gonna pay for my therapy',
-    'What a horrible day to have vision',
-    '😂😂😂😂',
-  ];
-  res.json('hit route');
   try {
-    const response = await axios.post('http://localhost:5000/predict', {
-      texts: dataToSend,
-    });
+    await Post.deleteMany({ owner: req.user._id });
 
-    // Handle the response from the Flask server
-    console.log(response.data);
-  } catch (error) {
-    console.error('Error making request to Flask server:', error);
+    for (let i = 0; i < dummyPosts.length; i++) {
+      let {
+        igId,
+        body,
+        likes,
+        media_url,
+        permalink,
+        comments,
+        timestamp,
+        tags,
+      } = dummyPosts[i];
+      let response;
 
-    // Handle the error
-    res.status(500).json({
-      message: 'Error sending data',
-      error: error.message,
-    });
+      try {
+        response = await axios.post('http://localhost:5000/predict', {
+          texts: comments,
+        });
+
+        // Handle the response from the Flask server
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error making request to Flask server:', error);
+        return res.status(500).json({
+          message: 'Error sending data',
+          error: error.message,
+        });
+      }
+
+      let sentiment = { positive: 0, negative: 0 };
+      response.data.forEach((comment) => {
+        if (comment.sentiment == 1) {
+          sentiment.positive += 1;
+        } else if (comment.sentiment == 0) {
+          sentiment.negative += 1;
+        }
+      });
+
+      const post = new Post({
+        igId,
+        body,
+        likes,
+        igTimestamp: timestamp,
+        media_url,
+        permalink,
+        comments,
+        sentiment,
+        tags,
+        owner: req.user,
+      });
+
+      await post.save();
+    }
+
+    res.status(201).send('All posts saved successfully');
+  } catch (err) {
+    console.error('Error saving the post:', err);
+    res.status(500).send('Error saving the post');
   }
-
-  // const post = new Post({ title, body, photo: pic, postedBy: req.user });
 });
 
 router.post('/get_sentiment', (req, res) => {});
@@ -95,115 +127,28 @@ router.post('/createpost', requireLogin, (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.get('/allposts', requireLogin, (req, res) => {
-  Post.find()
-    .populate('postedBy', '_id name')
-    .populate('comments.postedBy', '_id name')
-    .sort('-createdAt')
-    .then((posts) => {
-      res.json({ posts });
-    })
-    .catch((err) => console.log(err));
-});
+//Get post
+router.get('/posts', requireLogin, (req, res) => {
+  const userId = req.user._id;
 
-router.get('/getfollowingposts', requireLogin, (req, res) => {
-  Post.find({ postedBy: { $in: req.user.following } })
-    .populate('postedBy', '_id name')
-    .populate('comments.postedBy', '_id name')
-    .sort('-createdAt')
+  Post.find({ owner: userId })
     .then((posts) => {
-      res.json({ posts });
+      res.json(posts);
     })
-    .catch((err) => console.log(err));
-});
-
-router.get('/myposts', requireLogin, (req, res) => {
-  Post.find({ postedBy: req.user._id })
-    .populate('postedBy', '_id name')
-    .then((myposts) => res.json({ myposts }))
     .catch((err) => {
-      console.log(err);
+      console.error('Error fetching posts:', err);
+      res.status(500).json({ error: 'Error fetching posts' });
     });
 });
 
-router.put('/like', requireLogin, (req, res) => {
-  Post.findByIdAndUpdate(
-    req.body.postId,
-    {
-      $push: { likes: req.user._id },
-    },
-    {
-      new: true,
-    }
-  ).exec((err, result) => {
-    if (err) {
-      return res.status(422).json({ error: err });
-    } else {
-      res.json(result);
-    }
-  });
-});
-router.put('/unlike', requireLogin, (req, res) => {
-  Post.findByIdAndUpdate(
-    req.body.postId,
-    {
-      $pull: { likes: req.user._id },
-    },
-    {
-      new: true,
-    }
-  ).exec((err, result) => {
-    if (err) {
-      return res.status(422).json({ error: err });
-    } else {
-      res.json(result);
-    }
-  });
-});
-
-router.put('/comment', requireLogin, (req, res) => {
-  const comment = {
-    text: req.body.text,
-    postedBy: req.user._id,
-  };
-  Post.findByIdAndUpdate(
-    req.body.postId,
-    {
-      $push: { comments: comment },
-    },
-    {
-      new: true,
-    }
-  )
-    .populate('comments.postedBy', '_id name')
-    .populate('postedBy', '_id name')
-    .exec((err, result) => {
-      if (err) {
-        return res.status(422).json({ error: err });
-      } else {
-        res.json(result);
-      }
-    });
-});
-
-router.delete('/deletepost/:postId', requireLogin, (req, res) => {
-  Post.findOne({ _id: req.params.postId })
-    .populate('postedBy', '_id')
-    .exec((err, post) => {
-      if (err || !post) {
-        return res.status(422).json({ error: err });
-      }
-      if (post.postedBy._id.toString() === req.user._id.toString()) {
-        post
-          .remove()
-          .then((result) => {
-            res.json(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    });
+//Get single post
+router.get('/getpost', requireLogin, (req, res) => {
+  // console.log(req.query.postId);
+  Post.find({ igId: req.query.postId })
+    .then((post) => {
+      res.json({ post });
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

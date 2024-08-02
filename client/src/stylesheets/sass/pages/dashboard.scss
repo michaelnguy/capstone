@@ -50,6 +50,18 @@
   &-red {
     background: rgba(213, 1, 0, 0.1);
   }
+
+  &-teal {
+    background: rgba(0, 193, 248, 0.12);
+  }
+
+  &-lime {
+    background: rgba(151, 202, 49, 0.12);
+  }
+
+  &-light {
+    background: rgba(223, 229, 239, 0.5);
+  }
 }
 
 .card-icon {
@@ -71,6 +83,18 @@
 
   &-red {
     color: #d50100;
+  }
+
+  &-teal {
+    color: #00c1f8;
+  }
+
+  &-lime {
+    color: #97ca31;
+  }
+
+  &-light {
+    color: #1a2142;
   }
 }
 

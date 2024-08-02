@@ -3,7 +3,11 @@ const dummyPosts = [
     igId: 'C9yNPxXJuoZ',
     body: "@superlinenetwork Eric turns into a barber. He's 'giving' @vivekxrama hair advice to fit his Head Shape and Eyebrows but…. Square Barber completely disagrees with Eric and decides to bless Vivek with a Burst Fade with the V line up. How did Square Barber do? #12pell #barber #hair #burstfade #vlineup #fade #taper #midfade #lowfade #quiff",
     likes: 916,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post1',
+    tags: ['consultation', 'fade'],
+    timestamp: '2024-07-24T00:03:03+0000',
+    permalink: 'https://www.instagram.com/reel/C9yNPxXJuoZ/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/654E87EA0B177061CE29D3D7F5A035B5_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=110&vs=846287603682953_714679093&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC82NTRFODdFQTBCMTc3MDYxQ0UyOUQzRDdGNUEwMzVCNV92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dBVzdfaHEyQll6XzZib0JBQWhiODN6bTJPa0hicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJrCx7peglJZBFQIoAkMzLBdARiU%2FfO2RaBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYCakTqin6qwUxx4KtZWzB2DrxMcAZ0zsBJvXHQzxonzpQ&oe=66A5566E&_nc_sid=1d576d',
     comments: [
       'Damn cuz',
       'i need 12pell at the superline store next',
@@ -32,10 +36,14 @@ const dummyPosts = [
     ],
   },
   {
-    igId: 'ig002',
+    igId: 'C9xzLY4yNVr',
     body: 'Top 3 Worst Haircuts Of All Time IN LYYYFE',
+    tags: ['interview'],
     likes: 1306,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post2',
+    timestamp: '2024-07-23T20:12:22+0000',
+    permalink: 'https://www.instagram.com/reel/C9xzLY4yNVr/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/C1486CA398C147E5445883A2A36B1A90_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=110&vs=1514713249255420_3428963549&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9DMTQ4NkNBMzk4QzE0N0U1NDQ1ODgzQTJBMzZCMUE5MF92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dQWGI5aHBRXzVBYWVDNEVBQmVvdzR5VmpVRjRicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJvKo%2B%2FG6rI9AFQIoAkMzLBdAVVrAgxJumBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYC7s59gVaNdnJxEcRkW4Ue4-VoHH5XHkMgmSRw63JJlpA&oe=66A558BA&_nc_sid=1d576d',
     comments: [
       'plan bs in the stroller is diabolical 😂',
       'Bros fit got elevated, IN LYYYFFEEEEEEE!!🤞🏾🤞🏾😭🔥',
@@ -73,9 +81,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9vaWJGyZ6C',
+    timestamp: '2024-07-22T21:59:14+0000',
     body: 'He tried to cut this Anime Hairstyle for the last 2 years Tired of the short hair he’s rocked in the past, he grew out his hair into the Eren Yeager. Egg Barber relayer’d and texturized his straight asian hair into Inspo Pictures! #hair #barber #12pell #haircare #longhair #erenyeager',
     likes: 4220,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post3',
+    tags: ['consultation', 'longhair'],
+    permalink: 'https://www.instagram.com/reel/C9vaWJGyZ6C/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/F64003FD1611B474BE7F664A1DD92393_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=105&vs=1030397885093892_1504089724&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9GNjQwMDNGRDE2MTFCNDc0QkU3RjY2NEExREQ5MjM5M192aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dLRjY5eG9NMGpGRlVDSURBRUROblFiZUxyRVBicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJszEtKLPuY5AFQIoAkMzLBdARfqfvnbItBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYDbrmEXcEoQ0m59lXm2ipToOik4gvONVKtacnLD_vv0jQ&oe=66A56CDD&_nc_sid=1d576d',
     comments: [
       'OK that was the cleanest cut ever 🔥',
       'wait the ponytail looks so good',
@@ -103,10 +115,14 @@ const dummyPosts = [
     ],
   },
   {
-    igId: 'C9sw4R7ycBk/',
+    igId: 'C9sw4R7ycBk',
+    timestamp: '2024-07-21T21:15:20+0000',
     body: 'Pell Academy - How To Cut A Brushback #haircare #hairroutine #hairhealth #12pell #menshair #haircut #hairstyle #hairtypes #lowtaperfade #taperfade',
     likes: 1624,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post4',
+    tags: ['tutorial', 'brushback'],
+    permalink: 'https://www.instagram.com/reel/C9sw4R7ycBk/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/504AA7FD5BF1EC1DE92C1B88ADF17FAB_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=105&vs=848697187151171_189490484&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC81MDRBQTdGRDVCRjFFQzFERTkyQzFCODhBREYxN0ZBQl92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dQLUg5QnBrdEdGYjNtTUlBTFp4LWh1cFRvVnZicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJu6X9J%2FN370%2FFQIoAkMzLBdAS4U%2FfO2RaBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYB5q5Ght-ScRWOAiA2f5KhYyu0aDn0z3ZkK4Y8wEwQQLw&oe=66A55F05&_nc_sid=1d576d',
     comments: [
       'nice glasses, you got an ID on those frames?',
       'damn you did him rightt🔥🔥',
@@ -123,10 +139,14 @@ const dummyPosts = [
     ],
   },
   {
-    igId: 'C9qQLN8yOZV/',
+    igId: 'C9qQLN8yOZV',
+    timestamp: '2024-07-20T21:50:29+0000',
     body: 'POV: You decide to twin with your co-worker #barber #comedy',
+    tags: ['skit'],
     likes: 3395,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post5',
+    permalink: 'https://www.instagram.com/reel/C9qQLN8yOZV/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/A24132F76B738391299257727E3F2FAB_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=105&vs=813861553838138_1340837352&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9BMjQxMzJGNzZCNzM4MzkxMjk5MjU3NzI3RTNGMkZBQl92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dFWnQ5Um94RmZCTFFOc0NBSTJ6UlRvNk5kTmticV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJsDn4%2BXkl8RBFQIoAkMzLBdAI85WBBiTdRgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYBo4dWu3yQT1lCh7d3zoT3_sAmw9V8Lrexck8OLT8rpxA&oe=66A561CC&_nc_sid=1d576d',
     comments: [
       'But he ate tho',
       'What’s the second girl’s @ ???? NEED IT RN',
@@ -158,9 +178,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9qGYhayoTm',
+    timestamp: '2024-07-20T20:25:28+0000',
     body: 'His Friends Pressured Him to Have Long Hair Square Barber set Kris for a hair journey today. Tired of how unmanageable his short hair was and all the roasts his friends gave him, he wanted to a total different change. Square Barber wanted to let the curls grow out another 3-4 months to have more coverage around the neck area, making him look more professional! #barber #hair #12pell #hairstyle #curls #frizz #wavy #curlyhair',
     likes: 2045,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post6',
+    tags: ['consultation', 'longhair'],
+    permalink: 'https://www.instagram.com/reel/C9qGYhayoTm/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/8E434B8BBFD87EFE4137131EC96DA6BB_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=107&vs=356045680866904_1014956100&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC84RTQzNEI4QkJGRDg3RUZFNDEzNzEzMUVDOTZEQTZCQl92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dFTnQ5UnBnSmJqWVlVb0hBS3VpUXN4VU5jNXJicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJuSx847XrI5AFQIoAkMzLBdAR7AAAAAAABgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYAuI1ooGwiN80aVc3idJeJxpUCe9Lwu09BwzoihgogcgQ&oe=66A5654C&_nc_sid=1d576d',
     comments: [
       'Now that is a great haircut',
       'Holy Moses. Chef’s kiss',
@@ -186,10 +210,14 @@ const dummyPosts = [
     ],
   },
   {
-    igId: 'ig007',
+    igId: 'C9nxSlvy3T3',
+    timestamp: '2024-07-19T22:42:44+0000',
     body: 'POV: You’re a female barber 😳 #barber #comedy',
+    tags: ['skit'],
     likes: 66863,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post7',
+    permalink: 'https://www.instagram.com/reel/C9nxSlvy3T3/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/7A44CCF7B0BBD164C05BFC086400689C_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=109&vs=1020773206240982_2501661547&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC83QTQ0Q0NGN0IwQkJEMTY0QzA1QkZDMDg2NDAwNjg5Q192aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dOYzI3UnBjSjV3SE5ta0VBRkNhalJkVm44TXZicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJviNgPeX%2BYhBFQIoAkMzLBdATDhR64UeuBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYC9R_koJtE085Whollc5FwB41YGnjGHZmcrkUf3zL_81g&oe=66A54B04&_nc_sid=1d576d',
     comments: [
       'Tim is 4’10 with shoes',
       "There's a female barber here. She didn't asked me to look down she just grab my head and shove it",
@@ -279,9 +307,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9ldsxlJdOu',
+    timestamp: '2024-07-19T01:13:37+0000',
     body: 'Here’s how to deal with your Over Grown Perm Hair! \n #hair #barber #perm #permhair #curls #waves #12pell #howto #razor',
+    tags: ['tutorial', 'perm'],
     likes: 1882,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post8',
+    permalink: 'https://www.instagram.com/reel/C9ldsxlJdOu/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/C0446FEEC31F637198FB238929432585_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=107&vs=785654957061512_1099825841&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9DMDQ0NkZFRUMzMUY2MzcxOThGQjIzODkyOTQzMjU4NV92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dNRXM4QnJkY1E1NERyb0RBR0FVSGFicHcxeFRicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJuqEvNOS%2B4JAFQIoAkMzLBdASvqfvnbItBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYCiRCnJmReWH9kiyXeA17W3yN-5TXz5MMmN6VHaT8UK_Q&oe=66A572BE&_nc_sid=1d576d',
     comments: [
       'perm me pls😮',
       'you did her well 👏',
@@ -310,9 +342,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9knVZzpRL5',
+    timestamp: '2024-07-18T17:17:36+0000',
     body: 'POV: You laugh it off cause you can’t hear',
+    tags: ['skit'],
     likes: 2372,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post9',
+    permalink: 'https://www.instagram.com/reel/C9knVZzpRL5/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/F540DC40B3B83DB6106ED8D7F17535BB_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=108&vs=928613645700091_2395764197&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9GNTQwREM0MEIzQjgzREI2MTA2RUQ4RDdGMTc1MzVCQl92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dHSFY3aG9CclRYaHFid0dBT1lEdGNmV2NsWUlicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJoD2gIHS79k%2FFQIoAkMzLBdASPul41P3zxgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYDhVOoB9k_mk4-6jV89fLjzZBcHHI9ZZdM2GTE5SFKmMQ&oe=66A56E7F&_nc_sid=1d576d',
     comments: [
       'Cordless andis master barbers punching the air. Me im punching the air right now 😂😂😂😂😂',
       'another great one 🔥',
@@ -322,10 +358,14 @@ const dummyPosts = [
     ],
   },
   {
-    igId: 'C9iqE-gIPcN/',
+    igId: 'C9iqE-gIPcN',
+    timestamp: '2024-07-17T23:03:38+0000',
     body: 'POV: When You Leave Your Arm on the Armrest #barber #comedy #barbercomedy #armrest',
+    tags: ['skit'],
     likes: 15567,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post10',
+    permalink: 'https://www.instagram.com/reel/C9iqE-gIPcN/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/0D4C0CAFDC9F35F74FEC0766FFD3B48B_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=107&vs=405983672472017_1253700793&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8wRDRDMENBRkRDOUYzNUY3NEZFQzA3NjZGRkQzQjQ4Ql92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dPMVA3UnF6VWQ5UFBnUUVBQVVPNjByamJleGticV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJszb9Krex4dBFQIoAkMzLBdATbJN0vGp%2FBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYAHvwPKkemmeQALRgsmQJHmHXxXUJ2T4QS_HddVOTgAzA&oe=66A56D24&_nc_sid=1d576d',
     comments: [
       'Nahhhhhh the thumb rub was diabolical',
       'Can we get a behind the scene on this one? 🤣',
@@ -476,10 +516,14 @@ const dummyPosts = [
     ],
   },
   {
-    igId: 'ig011',
-    body: 'Just finished a great workout 💪 #fitnessgoals',
-    likes: 160,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post11',
+    igId: 'C9iX_59ySIg',
+    timestamp: '2024-07-17T20:31:47+0000',
+    body: 'His Old Barber Didn’t Understand What He Wanted \n Consultation - Two Block \n Sam grew out his hair for more than 6 MONTHS! He wanted to get Lego Barber’s signature Two Block hairstyle. Inspired by the previous Two Block videos, he liked the Middle Part style. Having the options to style/part any way was a huge bonus for him!\n Did Lego Barber cook on Sam’s 2 Block?? \n#12pell #barber #2block #twoblock #undercut #tapers #taper #hair #texture #middlepart #midpart #fringe #slickback',
+    likes: 1914,
+    tags: ['consultation', 'twoblock'],
+    permalink: 'https://www.instagram.com/reel/C9iX_59ySIg/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/014E7D0E79D3FBD6B7F9FC697B24829E_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=108&vs=312185495217286_4043936360&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8wMTRFN0QwRTc5RDNGQkQ2QjdGOUZDNjk3QjI0ODI5RV92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dNTEY2aHBHREE5dmZWVUVBTVhTbE1STklpVmFicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJq71obCg54BAFQIoAkMzLBdATRU%2FfO2RaBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYBefReRh3Y396XDOWV6N6Ej9zIOl5fktt0BpxB7kuN3kg&oe=66A569D5&_nc_sid=1d576d',
     comments: [
       'he knew what he wanted and my bro was right',
       'Damn kids don’t go to Supercuts anymore?! 🤣',
@@ -568,9 +612,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9gRUzRJoM-',
+    timestamp: '2024-07-17T00:49:10+0000',
     body: 'How to Style the Perfect Fluffy Fringe #12pell #hair #barber #hairstyling #styling #fringe #fluffy',
+    tags: ['tutorial', 'fringe'],
     likes: 1897,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post12',
+    permalink: 'https://www.instagram.com/reel/C9gRUzRJoM-/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/F543A0F705DEB91FE722658465C1FB92_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=100&vs=1202422527554079_49577011&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9GNTQzQTBGNzA1REVCOTFGRTcyMjY1ODQ2NUMxRkI5Ml92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dBcU03QnB5allLYzNab0JBQ3k2SUwyWWRwbFVicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJqDxyMD0oOo%2FFQIoAkMzLBdAQhU%2FfO2RaBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYCrC06_suhp6wsc8wK_FL_58KS79rvv9CathnWtm8y90g&oe=66A56102&_nc_sid=1d576d',
     comments: [
       'Matt once saved my entire family from a burning building. I owe him everything❤️ (he’s 6’4 btw)',
       'This helps a lot,thank you🙌🙏',
@@ -594,9 +642,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9f5x3pSgsv',
+    timestamp: '2024-07-16T21:22:34+0000',
     body: 'Consultation - Brushback \n Eoghan always got a Buzzcut from his family barber. His girlfriend told him to grow out his hair and he really likes it EXCEPT he doesn’t have a definitive hairstyle. With all this grown out hair, he doesn’t know what or how to style it. Egg Barber went with the Brushback hairstyle to fit his Diamond Face Shape as well as his lifestyle.\n #12pell #consultation #brushback #hair #barber #frizz #rizz',
     likes: 1957,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post13',
+    tags: ['consultation', 'brushback'],
+    permalink: 'https://www.instagram.com/reel/C9f5x3pSgsv/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/724FCD62C0E6576144F2F94AB84C60BE_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=101&vs=448960294720849_1369936664&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC83MjRGQ0Q2MkMwRTY1NzYxNDRGMkY5NEFCODRDNjBCRV92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dHTl83UnB5dEhGTTNuNEJBQXJxeERScWpkWW1icV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJuzRw4D37ZdAFQIoAkMzLBdAR%2BqfvnbItBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYCrPRn_23lBm3SknnvNpgjHaatI6lUwsNGNUMoZVzbb5A&oe=66A54F55&_nc_sid=1d576d',
     comments: [
       'It’s the best when their whole posture even changes, you can tell he really felt good with this haircut!',
       'This is absolutely fuego, sir Himothy',
@@ -629,9 +681,12 @@ const dummyPosts = [
   },
   {
     igId: 'C9deEwRS5IN',
+    timestamp: '2024-07-15T22:41:45+0000',
     body: 'We gave him all these hairstyles for y’all to see! \n Which one did you like better?',
+    tags: ['consultation'],
     likes: 6999,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post14',
+    permalink: 'https://www.instagram.com/reel/C9deEwRS5IN/',
+    media_url: '',
     comments: [
       'Middle part suited him the most',
       'Unpopular opinion, but who else thinks the brushback suited him the best?',
@@ -671,9 +726,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9a9DrZyulZ',
-    body: 'GConsultation - Brushback Did Pencil Barber give him the flow he wanted and needed? #hair #barber #12pell #brushback #longhair #wavy #thick #thickhair #straighthair',
+    timestamp: '2024-07-14T23:15:00+0000',
+    body: 'Consultation - Brushback Did Pencil Barber give him the flow he wanted and needed? #hair #barber #12pell #brushback #longhair #wavy #thick #thickhair #straighthair',
+    tags: ['consultation', 'longhair'],
     likes: 1082,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post15',
+    permalink: 'https://www.instagram.com/reel/C9a9DrZyulZ/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/D54FE01E6767FCC51B6CA8261B2861B8_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=109&vs=1212941293042757_1017980251&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9ENTRGRTAxRTY3NjdGQ0M1MUI2Q0E4MjYxQjI4NjFCOF92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dFUUY2QnExbWF4MmdFSUtBR2hMRm8zX1h5WkpicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJqiBj6%2BJhpJAFQIoAkMzLBdARnqfvnbItBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYBe_l3CsnMqYx3rMPpvYQ2UQG-_sQVL9BHFxWYNYQw3jA&oe=66A57694&_nc_sid=1d576d',
     comments: [
       'So much hair!! 🔥❤️',
       'omg this guy once saved my dog from a burning building 😮😮 can someone find his @ i need to thank him',
@@ -693,9 +752,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9Y7iSps7oo',
+    timestamp: '2024-07-14T04:23:27+0000',
     body: 'Pell Academy - How to cut a Textured Fringe #haircare #hairroutine #hairhealth #12pell #menshair #haircut #hairstyle #hairtypes #finehair #lowtaperfade #taperfade',
+    tags: ['tutorial', 'fringe'],
     likes: 3282,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post16',
+    permalink: 'https://www.instagram.com/reel/C9Y7iSps7oo/',
+    media_url:
+      'https://scontent.cdninstagram.com/v/t66.30100-6/319207908_510287211668821_652683338681898121_n.mp4?_nc_cat=104&ccb=1-7&_nc_sid=cb43bb&_nc_ohc=HLgTbYUsbWAQ7kNvgEEC6R0&_nc_ht=scontent.cdninstagram.com&edm=AL-3X8kEAAAA&oh=00_AYB7EaozjbkbSiHKvMGcu-w7zk9wBWtCS6hK1ORJ06YT7g&oe=66A9537E',
     comments: [
       'The wetter, the better? 💀',
       "Where's the results?",
@@ -723,9 +786,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9YGHTbSJmC',
+    timestamp: '2024-07-13T20:36:27+0000',
     body: 'When you grab the wrong snack #barber #comedy',
+    tags: ['skit'],
     likes: 19939,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post17',
+    permalink: 'https://www.instagram.com/reel/C9YGHTbSJmC/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/674A75F4B38B3F10EB688AF633AD43B6_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=108&vs=3373224152971941_2656523843&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC82NzRBNzVGNEIzOEIzRjEwRUI2ODhBRjYzM0FENDNCNl92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dPM2w0QnFuN0xOSlgtNERBQ0VzTHRVam9XQW1icV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJsqI%2Fr3q%2FLk%2FFQIoAkMzLBdANONT987ZFxgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYDO4LjYWerE8pN7A7GwhV7dwXZ2hAXVPsjOEGjMsh254A&oe=66A55B98&_nc_sid=1d576d',
     comments: [
       'Does that cost extra?',
       'Where’s part 2',
@@ -856,9 +923,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9VjigfSBQ4',
+    timestamp: '2024-07-12T21:01:26+0000',
     body: 'Consultation - Middle Part Flow \n Joe wanted to let go a part of his super long hair. He’s never had long hair before and he wanted to try something different. After letting his girlfriend practice Layering on his hair, he wanted an intentional Medium Length Layered Middle Part. Before going back to his Skin Fade Roots. \n Did Pencil Barber do him right?',
     likes: 1248,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post18',
+    tags: ['consultation', 'middlepart'],
+    permalink: 'https://www.instagram.com/reel/C9VjigfSBQ4/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/C543AC4821CAA8E243824D8C613C84A3_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=104&vs=278451438664333_2518750051&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9DNTQzQUM0ODIxQ0FBOEUyNDM4MjREOEM2MTNDODRBM192aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dQdzIxaHBrLUU0MllQUUNBTVV5TW1pcGFqNEpicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJvb04Ye9jINAFQIoAkMzLBdASgqfvnbItBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYAJ9qs9kzmkMYhnEnmYJ7Wy3I5L_q2bcANZbzOJn43H2w&oe=66A54DF1&_nc_sid=1d576d',
     comments: [
       'As the girlfriend:🔥🔥🔥',
       'man they always be putting smiles on my face. Istg if i ever go to nyc i am dropping by and getting a cut',
@@ -872,9 +943,13 @@ const dummyPosts = [
   },
   {
     igId: 'C9U0H6bu6WS',
+    timestamp: '2024-07-11T21:05:42+0000',
     body: 'Is Beginner Barber Simon getting better at fading?? #buzzcut #skinfade #hairstyles #haircut #barber #hair',
+    tags: ['buzzcut'],
     likes: 3669,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post19',
+    permalink: 'https://www.instagram.com/reel/C9U0H6bu6WS/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/3C4881B3212716EAEEE676DD0791338E_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=103&vs=890643726208254_2794367883&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8zQzQ4ODFCMzIxMjcxNkVBRUVFNjc2REQwNzkxMzM4RV92aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dOLUd0aHJQZENRUVF2b0ZBTWJSWU1ucXlLQlRicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJtqajpaKrcBAFQIoAkMzLBdAS7U%2FfO2RaBgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYDHYATY-Jv3mPcMJ3RdK5E1BBcMq-hlAV4F8xNePebTHg&oe=66A56352&_nc_sid=1d576d',
     comments: [
       'Redye it 🙄',
       "Best cut I've seen here",
@@ -896,8 +971,12 @@ const dummyPosts = [
   {
     igId: 'C9S-ghZSWgh',
     body: 'POV: Your client has a date',
+    tags: ['skit'],
+    timestamp: '2024-07-10T12:15:26+0000',
     likes: 44804,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post20',
+    permalink: 'https://www.instagram.com/reel/C9S-ghZSWgh/',
+    media_url:
+      'https://scontent.cdninstagram.com/o1/v/t16/f1/m86/1D410898E088B80081625112967B2B83_video_dashinit.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLmNsaXBzLnVua25vd24tQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=107&vs=26030454389933409_1179681979&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8xRDQxMDg5OEUwODhCODAwODE2MjUxMTI5NjdCMkI4M192aWRlb19kYXNoaW5pdC5tcDQVAALIAQAVAhg6cGFzc3Rocm91Z2hfZXZlcnN0b3JlL0dQRW4yeHFFWHhBTHoxa0VBQlhILXcwTlEzc1NicV9FQUFBRhUCAsgBACgAGAAbAYgHdXNlX29pbAExFQAAJqbgh%2FPZpcVBFQIoAkMzLBdAKH1wo9cKPRgSZGFzaF9iYXNlbGluZV8xX3YxEQB1AAA%3D&ccb=9-4&oh=00_AYAfGnNBzugApomqlFn3mEevobsDOU_D0FQvFBQ-5DyHRQ&oe=66A55EC6&_nc_sid=1d576d',
     comments: [
       'Bro gripped it with nefarious intent',
       'Bro just deforested the Amazons',
@@ -1223,9 +1302,12 @@ const dummyPosts = [
   },
   {
     igId: 'C9QHJwUpfYR',
+    timestamp: '2024-07-09T18:55:26+0000',
     body: 'Which Monster is your favorite?#maplestory #monsters #childhood #nostalgia #12pell #transformed #silent #barber #hair #hairdye #color #art',
     likes: 13776,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post21',
+    tags: ['hairdye'],
+    permalink: 'https://www.instagram.com/reel/C9QHJwUpfYR/',
+    media_url: '',
     comments: [
       'theyre a badass before and after',
       'Maple story was SO goated',
@@ -1443,7 +1525,10 @@ const dummyPosts = [
     igId: 'C9QBvRGPIwh',
     body: 'Reasons why you should wear sunglasses in the shop 😭',
     likes: 2445,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post22',
+    tags: ['skit'],
+    timestamp: '2024-07-08T16:00:26+0000',
+    permalink: '',
+    media_url: '',
     comments: [
       'Ayo’T 😬😬😬🙈🙈🙈',
       '💀💀',
@@ -1458,10 +1543,13 @@ const dummyPosts = [
     ],
   },
   {
-    igId: 'C9QBvRGPIwh',
+    igId: 'C9LdCztJNcl',
     body: 'Consultation - 60/40 with Skin Tapers \n Elvis went to Tennessee to see how bad their haircuts were. It wasn’t as bad as he expected it but he needed to get fixed. Lego Barber and Elvis liked the hairstyle he has right now to fit his lifestyle. All he needed was a good clean up and learning how to style!\nDid Lego Barber make a comeback with this one??\n#12pell #barber #hair #skintaper #tapers #6040',
     likes: 956,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post23',
+    tags: ['consultation', 'taper'],
+    timestamp: '2024-07-08T12:02:26+0000',
+    permalink: '',
+    media_url: '',
     comments: [
       'Cooked',
       'Bro went from 😢 to 🇰🇵',
@@ -1475,9 +1563,12 @@ const dummyPosts = [
   },
   {
     igId: 'C9IOfRjucIE',
+    timestamp: '2024-07-07T21:01:26+0000',
+    tags: ['consultation', 'middlepart', 'wolfcut'],
     body: 'Consultation - Middle Part with Taper Fades\nAJ didn’t want to deal with the long hair anymore. Initially growing out his hair for a Wolfcut, he was sick and tired of the flare bothering him. He wanted to go back to a shorter hairstyle in the back but still maintain the length in the front. Lego thought tapering the back while keeping the Middle Part would frame his face the best.\nHow’d Lego Barber do?\n#12pell #hair #middlepart #tapers #flow #texture #wolfcut #barber #nyc',
     likes: 2260,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post24',
+    permalink: '',
+    media_url: '',
     comments: [
       'kind of a downgrade imo',
       'Bro went from “ahhh, i love nature” to “NOOOO I GOT 99% ON MY TEST”😭',
@@ -1513,8 +1604,11 @@ const dummyPosts = [
   {
     igId: 'C9IDu0tJoyI',
     body: 'Here’s how to use Curl Cream! \n#Curl #Curls #CurlCream #12pell #hairstyling #haircare #hairroutine #perm #wavy #curly',
+    tags: ['tutorial', 'curl', 'perm'],
     likes: 1679,
-    photo: 'https://dummyimage.com/600x400/000/fff&text=Post25',
+    timestamp: '2024-07-06T11:08:26+0000',
+    permalink: '',
+    media_url: '',
     comments: [
       'before and before',
       'I got the same water bottle',

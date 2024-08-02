@@ -1,0 +1,34 @@
+.post-card-box {
+  box-shadow: 0px 12px 24px -4px rgba(145, 158, 171, 0.12),
+    0px 0px 2px 0px rgba(145, 158, 171, 0.2);
+  border-radius: 7px;
+  border: none;
+  display: inline-block;
+}
+
+.post-bold {
+  font-weight: 500;
+}
+
+.post-bottom-percent {
+  color: black;
+  font-size: 14px;
+}
+
+.post-body-container {
+  padding: 0 5rem 5rem;
+  background-color: #f1f5f9;
+}
+
+.single-post-button {
+  height: max-content;
+  border-radius: 5px;
+}
+
+.show-link {
+  color: blue;
+  font-weight: 400;
+  &:hover {
+    cursor: pointer;
+  }
+}

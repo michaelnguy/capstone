@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
 
 const uri =
@@ -17,6 +18,7 @@ require('./models/user');
 require('./models/post');
 
 app.use(express.json());
+app.use(cors());
 
 app.use(require('./routes/auth'));
 app.use(require('./routes/post'));

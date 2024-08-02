@@ -34,3 +34,30 @@
   align-items: center;
   text-decoration: none;
 }
+/*    ////////////////////////////////////////    */
+/*    Start Sentiment Overview Styling Section    */
+/*    ////////////////////////////////////////    */
+
+.overview-card-box {
+  margin-bottom: 1rem;
+}
+
+.overview-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a2142;
+  margin: 0;
+}
+
+.section-outer-wrapper {
+  padding: 0 0.75rem;
+}
+
+.section-inner-wrapper {
+  background-color: white;
+  border-radius: 0.375rem;
+}
+
+.sentiment-body-container {
+  padding: 0 0.75rem;
+}

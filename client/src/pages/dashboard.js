@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import {
   Container,
@@ -15,18 +15,21 @@ import {
   BarChartSteps,
   Hash,
 } from 'react-bootstrap-icons';
+import axios from 'axios';
 
+import userData from '../dummyData/barber.json';
 import name from '../images/name.png';
 import logo from '../images/logo.png';
 
 import TopNavbar from '../components/TopNavbar';
 import Overview from '../components/Overview';
 import SentimentOverview from '../components/SentimentOverview';
-import PostAnalysis from '../components/PostAnalysis';
 import SinglePostAnalysis from '../components/SinglePostAnalysis';
+import AllPostAnalysis from '../components/AllPostAnalysis';
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const handleNavigation = (path) => {
@@ -86,7 +89,9 @@ export default function Dashboard() {
                     <ListGroup.Item
                       action
                       className='sidebar-item'
-                      onClick={() => handleNavigation('/app/sentimentOverview')}
+                      onClick={() =>
+                        handleNavigation('/app/sentiment-overview')
+                      }
                     >
                       Overview
                     </ListGroup.Item>
@@ -146,11 +151,17 @@ export default function Dashboard() {
             <Routes>
               <Route path='/dashboard' element={<Overview />} />
               <Route
-                path='/sentimentOverview'
-                element={<SentimentOverview />}
+                path='/sentiment-overview'
+                element={<SentimentOverview userData={userData} />}
               />
-              <Route path='/posts' element={<PostAnalysis />} />
-              <Route path='/posts/:postId' element={<SinglePostAnalysis />} />
+              <Route
+                path='/posts'
+                element={<AllPostAnalysis userData={userData} />}
+              />
+              <Route
+                path='/posts/:postId'
+                element={<SinglePostAnalysis userData={userData} />}
+              />
               <Route
                 path='/hashtag'
                 element={<div>Hashtag Recommendation Component</div>}
