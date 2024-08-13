@@ -15,46 +15,10 @@ import requests
 import torch
 import sys
 import os
-
-sys.path.append(os.path.dirname(__file__))
-import json
 from transformers import AutoImageProcessor, ViTModel
 
-from data_utils import load_image_tags
-from index import create_index_from_df
-from tag_recommender import TagRecommender
 
-# Constants (these can be parameterized if needed)
-DATA_DIR = "./HARRISON/"
-DATA_LEN = 57383
-INDICES_SPLIT_FILE_NAME = "data_indices_split.json"
-IMG_PATHS_FILE_NAME = "data_list.txt"
-GT_TAGS_FILE_NAME = "tag_list.txt"
-EMBEDDINGS_FILE_NAME = "data_embeddings.txt"
-ID_COL = "img_id"
-EMB_COL = "emb"
-
-
-def load_data():
-    emb_df = pd.read_json(os.path.join(DATA_DIR, EMBEDDINGS_FILE_NAME), lines=True)
-    with open(os.path.join(DATA_DIR, INDICES_SPLIT_FILE_NAME)) as f:
-        indices_split = json.load(f)
-
-    train_df = emb_df[emb_df[ID_COL].isin(indices_split["train"])]
-    val_df = emb_df[emb_df[ID_COL].isin(indices_split["val"])]
-    val_idx_mapping = {i: img_id for i, img_id in enumerate(val_df[ID_COL])}
-
-    return train_df, val_df, val_idx_mapping
-
-
-def create_recommender(train_df):
-    img_index, train_idx_mapping = create_index_from_df(train_df)
-    tags_list = load_image_tags(os.path.join(DATA_DIR, GT_TAGS_FILE_NAME))
-    recommender = TagRecommender(img_index, train_idx_mapping, tags_list)
-
-    return recommender
-
-
+sys.path.append(os.path.dirname(__file__))
 IMG_MODEL_NAME = "google/vit-base-patch16-224-in21k"
 
 VIT_IMAGE_PROCESSOR = AutoImageProcessor.from_pretrained(IMG_MODEL_NAME)
@@ -107,9 +71,9 @@ def expand_contractions(text):
 
 app = Flask(__name__)
 
-# Load the data and create the recommender once when the server starts
-train_df, val_df, val_idx_mapping = load_data()
-recommender = create_recommender(train_df)
+
+with open("recommender.pkl", "rb") as f:
+    recommender_test = pickle.load(f)
 
 
 @app.route("/get_hashtags", methods=["POST"])
@@ -121,7 +85,7 @@ def get_hashtags():
         # Process the image and get hashtags
         image = get_image_from_url(image_url)
         images = [image]
-        pred_tags = recommender.get_tags_for_image(images, img_vectorizer)
+        pred_tags = recommender_test.get_tags_for_image(images, img_vectorizer)
 
         return jsonify({"image_url": image_url, "tags": pred_tags})
 
