@@ -5,8 +5,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 
-const uri =
-  'mongodb+srv://mqnguy:3RGzrHg0Mpyu0n4y@capstone.qhenjcs.mongodb.net/?appName=capstone';
+const MONGO_DB_PW = process.env.MONGODB_ATLAS_PW;
+
+const uri = `mongodb+srv://mqnguy:${MONGO_DB_PW}@capstone.qhenjcs.mongodb.net/?appName=capstone`;
 
 mongoose.connection.on('connected', () =>
   console.log('connected to MongoDB Atlas')

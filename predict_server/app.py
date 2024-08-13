@@ -1,257 +1,184 @@
 from flask import Flask, request, jsonify
-import pickle
 import pandas as pd
+import pickle
 import re
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from nltk.stem import WordNetLemmatizer
 import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from nltk.stem.porter import PorterStemmer
+import emoji
+import contractions
+from io import BytesIO
+from PIL import Image
+from collections import OrderedDict
+import requests
+import torch
+import sys
+import os
 
-nltk.download("wordnet")
+sys.path.append(os.path.dirname(__file__))
+import json
+from transformers import AutoImageProcessor, ViTModel
+
+from data_utils import load_image_tags
+from index import create_index_from_df
+from tag_recommender import TagRecommender
+
+# Constants (these can be parameterized if needed)
+DATA_DIR = "./HARRISON/"
+DATA_LEN = 57383
+INDICES_SPLIT_FILE_NAME = "data_indices_split.json"
+IMG_PATHS_FILE_NAME = "data_list.txt"
+GT_TAGS_FILE_NAME = "tag_list.txt"
+EMBEDDINGS_FILE_NAME = "data_embeddings.txt"
+ID_COL = "img_id"
+EMB_COL = "emb"
+
+
+def load_data():
+    emb_df = pd.read_json(os.path.join(DATA_DIR, EMBEDDINGS_FILE_NAME), lines=True)
+    with open(os.path.join(DATA_DIR, INDICES_SPLIT_FILE_NAME)) as f:
+        indices_split = json.load(f)
+
+    train_df = emb_df[emb_df[ID_COL].isin(indices_split["train"])]
+    val_df = emb_df[emb_df[ID_COL].isin(indices_split["val"])]
+    val_idx_mapping = {i: img_id for i, img_id in enumerate(val_df[ID_COL])}
+
+    return train_df, val_df, val_idx_mapping
+
+
+def create_recommender(train_df):
+    img_index, train_idx_mapping = create_index_from_df(train_df)
+    tags_list = load_image_tags(os.path.join(DATA_DIR, GT_TAGS_FILE_NAME))
+    recommender = TagRecommender(img_index, train_idx_mapping, tags_list)
+
+    return recommender
+
+
+IMG_MODEL_NAME = "google/vit-base-patch16-224-in21k"
+
+VIT_IMAGE_PROCESSOR = AutoImageProcessor.from_pretrained(IMG_MODEL_NAME)
+VIT_MODEL = ViTModel.from_pretrained(IMG_MODEL_NAME)
+
+
+def get_image_from_url(img_url):
+    response = requests.get(img_url)
+    img = Image.open(BytesIO(response.content))
+    return img
+
+
+def get_embeddings_from_model(images, image_processor, model):
+    inputs = image_processor(images, return_tensors="pt")
+
+    with torch.no_grad():
+        outputs = model(**inputs)
+
+    last_hidden_states = outputs.last_hidden_state
+    embeddings = last_hidden_states[:, 0].cpu()
+    return embeddings
+
+
+def img_vectorizer(images):
+    embeddings = get_embeddings_from_model(images, VIT_IMAGE_PROCESSOR, VIT_MODEL)
+    return embeddings.numpy()
+
 
 # Load the vectorizer and model
-with open("vectoriser-ngram-(1,2).pickle", "rb") as f:
+with open("vectorizer.pickle", "rb") as f:
     vectoriser = pickle.load(f)
 
 with open("Sentiment-LR.pickle", "rb") as f:
     model = pickle.load(f)
 
-# Defining dictionary containing all emojis with their meanings.
-emojis = {
-    ":)": "smile",
-    ":-)": "smile",
-    ";d": "wink",
-    ":-E": "vampire",
-    ":(": "sad",
-    ":-(": "sad",
-    ":-<": "sad",
-    ":P": "raspberry",
-    ":O": "surprised",
-    ":-@": "shocked",
-    ":@": "shocked",
-    ":-$": "confused",
-    ":\\": "annoyed",
-    ":#": "mute",
-    ":X": "mute",
-    ":^)": "smile",
-    ":-&": "confused",
-    "$_$": "greedy",
-    "@@": "eyeroll",
-    ":-!": "confused",
-    ":-D": "smile",
-    ":-0": "yell",
-    "O.o": "confused",
-    "<(-_-)>": "robot",
-    "d[-_-]b": "dj",
-    ":'-)": "sadsmile",
-    ";)": "wink",
-    ";-)": "wink",
-    "O:-)": "angel",
-    "O*-)": "angel",
-    "(:-D": "gossip",
-    "=^.^=": "cat",
-}
+nltk.download("wordnet")
+nltk.download("omw-1.4")
+nltk.download("punkt")
+nltk.download("stopwords")
 
-## Defining set containing all stopwords in english.
-stopwordlist = [
-    "a",
-    "about",
-    "above",
-    "after",
-    "again",
-    "ain",
-    "all",
-    "am",
-    "an",
-    "and",
-    "any",
-    "are",
-    "as",
-    "at",
-    "be",
-    "because",
-    "been",
-    "before",
-    "being",
-    "below",
-    "between",
-    "both",
-    "by",
-    "can",
-    "d",
-    "did",
-    "do",
-    "does",
-    "doing",
-    "down",
-    "during",
-    "each",
-    "few",
-    "for",
-    "from",
-    "further",
-    "had",
-    "has",
-    "have",
-    "having",
-    "he",
-    "her",
-    "here",
-    "hers",
-    "herself",
-    "him",
-    "himself",
-    "his",
-    "how",
-    "i",
-    "if",
-    "in",
-    "into",
-    "is",
-    "it",
-    "its",
-    "itself",
-    "just",
-    "ll",
-    "m",
-    "ma",
-    "me",
-    "more",
-    "most",
-    "my",
-    "myself",
-    "now",
-    "o",
-    "of",
-    "on",
-    "once",
-    "only",
-    "or",
-    "other",
-    "our",
-    "ours",
-    "ourselves",
-    "out",
-    "own",
-    "re",
-    "s",
-    "same",
-    "she",
-    "shes",
-    "should",
-    "shouldve",
-    "so",
-    "some",
-    "such",
-    "t",
-    "than",
-    "that",
-    "thatll",
-    "the",
-    "their",
-    "theirs",
-    "them",
-    "themselves",
-    "then",
-    "there",
-    "these",
-    "they",
-    "this",
-    "those",
-    "through",
-    "to",
-    "too",
-    "under",
-    "until",
-    "up",
-    "ve",
-    "very",
-    "was",
-    "we",
-    "were",
-    "what",
-    "when",
-    "where",
-    "which",
-    "while",
-    "who",
-    "whom",
-    "why",
-    "will",
-    "with",
-    "won",
-    "y",
-    "you",
-    "youd",
-    "youll",
-    "youre",
-    "youve",
-    "your",
-    "yours",
-    "yourself",
-    "yourselves",
-]
+# Initialize the necessary tools
+lemmatizer = WordNetLemmatizer()
+stemmer = PorterStemmer()
+stop_words = set(stopwords.words("english"))
+
+
+def expand_contractions(text):
+    return contractions.fix(text)
+
 
 app = Flask(__name__)
 
+# Load the data and create the recommender once when the server starts
+train_df, val_df, val_idx_mapping = load_data()
+recommender = create_recommender(train_df)
 
-def preprocess(textdata):
-    processedText = []
 
-    # Create Lemmatizer and Stemmer.
-    wordLemm = WordNetLemmatizer()
+@app.route("/get_hashtags", methods=["POST"])
+def get_hashtags():
+    try:
+        data = request.json
+        image_url = data["image_url"]
 
-    # Defining regex patterns.
-    urlPattern = r"((http://)[^ ]*|(https://)[^ ]*|( www\.)[^ ]*)"
-    userPattern = "@[^\s]+"
-    alphaPattern = "[^a-zA-Z0-9]"
-    sequencePattern = r"(.)\1\1+"
-    seqReplacePattern = r"\1\1"
+        # Process the image and get hashtags
+        image = get_image_from_url(image_url)
+        images = [image]
+        pred_tags = recommender.get_tags_for_image(images, img_vectorizer)
 
-    for tweet in textdata:
-        tweet = tweet.lower()
+        return jsonify({"image_url": image_url, "tags": pred_tags})
 
-        # Replace all URls with 'URL'
-        tweet = re.sub(urlPattern, " URL", tweet)
-        # Replace all emojis.
-        for emoji in emojis.keys():
-            tweet = tweet.replace(emoji, "EMOJI" + emojis[emoji])
-        # Replace @USERNAME to 'USER'.
-        tweet = re.sub(userPattern, " USER", tweet)
-        # Replace all non alphabets.
-        tweet = re.sub(alphaPattern, " ", tweet)
-        # Replace 3 or more consecutive letters by 2 letter.
-        tweet = re.sub(sequencePattern, seqReplacePattern, tweet)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
-        tweetwords = ""
-        for word in tweet.split():
-            # Checking if the word is a stopword.
-            # if word not in stopwordlist:
-            if len(word) > 1:
-                # Lemmatizing the word.
-                word = wordLemm.lemmatize(word)
-                tweetwords += word + " "
 
-        processedText.append(tweetwords)
-
-    return processedText
+def preprocess_text(text):
+    # Convert to lowercase
+    text = text.lower()
+    # Expand contractions
+    text = expand_contractions(text)
+    # Convert emojis to text
+    text = emoji.demojize(text)
+    # Remove URLs
+    text = re.sub(r"http\S+|www\S+|https\S+", " ", text, flags=re.MULTILINE)
+    # Remove mentions and hashtags
+    text = re.sub(r"@\w+|#\w+", " ", text)
+    # Remove special characters and numbers
+    text = re.sub(r"[^a-zA-Z\s]", " ", text)
+    # Tokenize text
+    tokens = nltk.word_tokenize(text)
+    # Lemmatize and stem each token
+    tokens = [lemmatizer.lemmatize(token) for token in tokens if token is not None]
+    tokens = [stemmer.stem(token) for token in tokens]
+    # Remove stop words
+    tokens = [token for token in tokens if token not in stop_words]
+    # Remove duplicate tokens while preserving order
+    tokens = list(OrderedDict.fromkeys(tokens))
+    # Remove extra whitespace
+    text = " ".join(tokens)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
 
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    data = request.json
-    texts = data["texts"]
+    try:
+        data = request.json
+        texts = data["texts"]
 
-    # Predict the sentiment
-    textdata = vectoriser.transform(preprocess(texts))
-    sentiment = model.predict(textdata)
+        # Predict the sentiment
+        preprocessed_texts = [preprocess_text(text) for text in texts]
+        textdata = vectoriser.transform(preprocessed_texts)
+        sentiment = model.predict(textdata)
 
-    # Make a list of text with sentiment.
-    results = []
-    for text, pred in zip(texts, sentiment):
-        results.append({"text": text, "sentiment": int(pred)})
+        # Make a list of text with sentiment.
+        results = []
+        for text, pred in zip(texts, sentiment):
+            # Look for positive emojis and hard code sentiment
 
-    return jsonify(results)
+            results.append({"text": text, "sentiment": int(pred)})
+
+        return jsonify(results)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
 
 if __name__ == "__main__":

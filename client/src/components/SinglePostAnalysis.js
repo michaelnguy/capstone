@@ -23,7 +23,11 @@ export default function SinglePostAnalysis({ userData }) {
   const [show, setShow] = useState(false);
 
   const calcPercentages = (post) => {
-    const commentsCount = post.sentiment.positive + post.sentiment.negative;
+    console.log(post.sentiment);
+    const commentsCount =
+      post.sentiment.positive +
+      post.sentiment.negative +
+      post.sentiment.neutral;
     const posPercent =
       commentsCount > 0
         ? Math.round((post.sentiment.positive / commentsCount) * 100)
@@ -32,14 +36,15 @@ export default function SinglePostAnalysis({ userData }) {
       commentsCount > 0
         ? Math.round((post.sentiment.negative / commentsCount) * 100)
         : 0;
-    const neuPercent = Math.round(0.32 * 100); // Example values
-    const unkPercent = Math.round(0.17 * 100); // Example values
+    const neuPercent =
+      commentsCount > 0
+        ? Math.round((post.sentiment.neutral / commentsCount) * 100)
+        : 0;
 
     return {
       posPercent,
       negPercent,
       neuPercent,
-      unkPercent,
     };
   };
 
@@ -103,8 +108,11 @@ export default function SinglePostAnalysis({ userData }) {
     markup = (
       <Container className='post-body-container'>
         <Row>
-          <div className='d-flex'>
-            <h2 className='dashboard-heading'>Post Analysis - </h2>
+          <div className='d-flex justify-content-between align-items-center'>
+            <h2 className='dashboard-heading'>Post Analysis</h2>
+            <div className='card-wrapper overview-card-title'>
+              Last updated:
+            </div>
           </div>
         </Row>
         <Row className='d-flex'>
@@ -170,7 +178,9 @@ export default function SinglePostAnalysis({ userData }) {
                       <Card.Text className='card-number'>
                         {post.sentiment.positive}
                       </Card.Text>
-                      <div className='post-bottom-percent'>(2.31%)</div>
+                      <div className='post-bottom-percent'>
+                        ({percentages.posPercent}%)
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -186,7 +196,9 @@ export default function SinglePostAnalysis({ userData }) {
                       <Card.Text className='card-number'>
                         {post.sentiment.negative}
                       </Card.Text>
-                      <div className='post-bottom-percent'>(2.31%)</div>
+                      <div className='post-bottom-percent'>
+                        ({percentages.negPercent}%)
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -198,24 +210,13 @@ export default function SinglePostAnalysis({ userData }) {
                   </div>
                   <div>
                     <h6 className='card-title'>Neutral Comments</h6>
-                    <Card.Text className='card-number'>-</Card.Text>
+                    <Card.Text className='card-number'>
+                      {post.sentiment.neutral}
+                    </Card.Text>
                     <div>
-                      <div className='post-bottom-percent'>(2.31%)</div>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-              <Card className='post-card-box mb-4 me-4'>
-                <div className='d-flex card-wrapper align-items-center'>
-                  <div className='icon-container icon-container-orange d-flex align-items-center justify-content-center'>
-                    <Question className='card-icon-orange' size={28} />
-                  </div>
-                  <div>
-                    <h6 className='card-title'>Unknown Comments</h6>
-
-                    <div>
-                      <Card.Text className='card-number'>-</Card.Text>
-                      <div className='post-bottom-percent'>(2.31%)</div>
+                      <div className='post-bottom-percent'>
+                        ({percentages.neuPercent}%)
+                      </div>
                     </div>
                   </div>
                 </div>

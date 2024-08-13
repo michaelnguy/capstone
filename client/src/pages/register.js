@@ -3,9 +3,6 @@ import React, { useContext, useState } from 'react';
 import { Row, Col, Form, Button, Container } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useForm } from '../util/hooks';
-import { AuthContext } from '../context/auth';
-
 export default function Register(props) {
   const navigate = useNavigate();
   const [name, setName] = useState('');
@@ -50,12 +47,10 @@ export default function Register(props) {
       .catch((err) => console.log(err));
   };
 
-  //   const registerUser = () => {};
-
   return (
     <Container>
-      <Row className='mt-5 py-5 justify-content-center'>
-        <Col sm={8} md={6} lg={4} className='bg-white'>
+      <Row className='mt-5 justify-content-center align-items-center'>
+        <div className='auth-wrapper'>
           <h1 className='text-center'>Register</h1>
           <Form onSubmit={uploadFields}>
             <Form.Group>
@@ -107,7 +102,7 @@ export default function Register(props) {
               />
             </Form.Group>
 
-            <div className='text-center'>
+            <div className='text-center mt-4'>
               <Button variant='success' type='submit'>
                 Register
               </Button>
@@ -128,7 +123,7 @@ export default function Register(props) {
               </ul>
             </div>
           )}
-        </Col>
+        </div>
       </Row>
     </Container>
   );

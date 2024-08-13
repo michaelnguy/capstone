@@ -1,32 +1,11 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 
-export default function BarChart({ posPercentage, negPercentage }) {
-  //   const sentimentData = postsArray.reduce(
-  //     (acc, post) => {
-  //       const positiveSentiment = post.sentiment.positive;
-  //       const negativeSentiment = post.sentiment.negative;
-  //       const commentsCount = post.comments.length;
-
-  //       if (positiveSentiment > 0) {
-  //         acc.positive.totalComments += commentsCount;
-  //         acc.positive.count += positiveSentiment;
-  //       }
-
-  //       if (negativeSentiment > 0) {
-  //         acc.negative.totalComments += commentsCount;
-  //         acc.negative.count += negativeSentiment;
-  //       }
-
-  //       return acc;
-  //     },
-  //     {
-  //       positive: { totalComments: 0, count: 0 },
-  //       negative: { totalComments: 0, count: 0 },
-  //     }
-  //   );
-  //   console.log(sentimentData);
-
+export default function BarChart({
+  posPercentage,
+  negPercentage,
+  neuPercentage,
+}) {
   const averageCommentsData = [
     {
       sentiment: 'Positive',
@@ -36,13 +15,18 @@ export default function BarChart({ posPercentage, negPercentage }) {
       sentiment: 'Negative',
       Percent: negPercentage,
     },
+    {
+      sentiment: 'Neutral',
+      Percent: neuPercentage,
+    },
   ];
 
   // Function to determine bar colors based on the sentiment
   const getColor = (bar) => {
-    if (bar.data.sentiment === 'Positive') return '#365cf5'; // Green for Positive
+    if (bar.data.sentiment === 'Positive') return '#219653'; // Green for Positive
+    if (bar.data.sentiment === 'Neutral') return '#365cf5'; // Green for Positive
     if (bar.data.sentiment === 'Negative') return '#d50100'; // Red for Negative
-    return '#333'; // Default color
+    return '#219653'; // Default color
   };
 
   const MyBarChart = () => (
@@ -84,16 +68,5 @@ export default function BarChart({ posPercentage, negPercentage }) {
     />
   );
 
-  return (
-    <div
-      style={{
-        height: '500px',
-        width: '400px',
-        backgroundColor: 'white',
-        padding: '1rem',
-      }}
-    >
-      <MyBarChart />
-    </div>
-  );
+  return <MyBarChart />;
 }

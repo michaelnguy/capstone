@@ -10,12 +10,18 @@ import {
   EmojiAngry,
   EmojiNeutral,
   ArrowUpShort,
+  ArrowDownShort,
   Question,
 } from 'react-bootstrap-icons';
 import axios from 'axios';
 
 import BarChart from './BarChart';
-import { calcEngagementForList } from '../util/functions';
+import SentimentLineChart from './SentimentLineChart';
+import {
+  calcEngagementForList,
+  calcSentStats,
+  formatDate,
+} from '../util/functions';
 
 export default function SentimentOverview({ userData }) {
   const [posts, setPosts] = useState([]);
@@ -38,6 +44,7 @@ export default function SentimentOverview({ userData }) {
         });
         const fetchedPosts = response.data;
         setPosts(fetchedPosts);
+        console.log(fetchedPosts);
 
         setLoading(false);
       } catch (error) {
@@ -52,8 +59,7 @@ export default function SentimentOverview({ userData }) {
 
   useEffect(() => {
     if (posts.length > 0) {
-      setDatePosts(filterDate(time));
-      console.log(datePosts);
+      setDatePosts(filterPostsByDate(time));
     }
   }, [posts, time]);
 
@@ -63,69 +69,27 @@ export default function SentimentOverview({ userData }) {
     }
   }, [posts, selectedTag]);
 
-  const filterDate = (_days) => {
-    //Filter posts for selected time period
-    let numOfPosts;
-    switch (_days) {
-      case 'All Time':
-        numOfPosts = posts.length;
-        break;
-      case '7 days':
-        // code block
-        numOfPosts = 10;
-        break;
-      case '30 days':
-        numOfPosts = 19;
-        break;
-      default:
-        numOfPosts = 25;
+  const filterPostsByDate = (filterType) => {
+    const targetDate = new Date('2024-08-07T00:00:00+0000');
+    const sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000;
+    const thirtyDaysInMillis = 30 * 24 * 60 * 60 * 1000;
+
+    if (filterType === '7 days') {
+      return posts.filter((post) => {
+        const postDate = new Date(post.igTimestamp);
+        const timeDifference = Math.abs(targetDate - postDate);
+        return timeDifference <= sevenDaysInMillis;
+      });
+    } else if (filterType === '30 days') {
+      return posts.filter((post) => {
+        const postDate = new Date(post.igTimestamp);
+        const timeDifference = Math.abs(targetDate - postDate);
+        return timeDifference <= thirtyDaysInMillis;
+      });
+    } else {
+      // Show all posts
+      return posts;
     }
-
-    const timePeriodPosts = posts.slice(0, numOfPosts);
-
-    return timePeriodPosts;
-  };
-
-  const calcSentStats = (postDict) => {
-    // Calculate the total number of comments
-    const totalComments = postDict.reduce(
-      (acc, dict) => acc + dict.comments.length,
-      0
-    );
-
-    const posComments = postDict.reduce(
-      (acc, dict) => acc + dict.sentiment.positive,
-      0
-    );
-    const negComments = postDict.reduce(
-      (acc, dict) => acc + dict.sentiment.negative,
-      0
-    );
-    // const neuComments = postDict.reduce(
-    //   (acc, dict) => acc + dict.sentiment.positive,
-    //   0
-    // );
-    // const unkComments = postDict.reduce(
-    //   (acc, dict) => acc + dict.sentiment.positive,
-    //   0
-    // );
-
-    const posPercentage = Math.round((posComments / totalComments) * 100);
-    const negPercentage = Math.round((negComments / totalComments) * 100);
-    // const neuPercentage = neuComments / totalComments;
-    // const unkPercentage = unkComments / totalComments;
-
-    return {
-      totalComments,
-      posComments,
-      negComments,
-      neuComments: 351,
-      unkComments: 23,
-      posPercentage,
-      negPercentage,
-      neuPercentage: 24,
-      unkPercentage: 12,
-    };
   };
 
   const calcTopicPosts = () => {
@@ -145,12 +109,20 @@ export default function SentimentOverview({ userData }) {
     posComments,
     negComments,
     neuComments,
-    unkComments,
     posPercentage,
     negPercentage,
     neuPercentage,
-    unkPercentage,
-  } = calcSentStats(filterDate(time));
+  } = calcSentStats(filterPostsByDate(time));
+
+  const {
+    totalComments: totalCommentsAll,
+    posComments: posCommentsAll,
+    negComments: negCommentsAll,
+    neuComments: neuCommentsAll,
+    posPercentage: posPercAll,
+    negPercentage: negPercAll,
+    neuPercentage: neuPercAll,
+  } = calcSentStats(filterPostsByDate('All Time'));
 
   //calculate sentiment for tag
   const {
@@ -158,17 +130,24 @@ export default function SentimentOverview({ userData }) {
     posComments: tagPosComments,
     negComments: tagNegComments,
     neuComments: tagNeuComments,
-    unkComments: tagUnkComments,
     posPercentage: tagPosPerc,
     negPercentage: tagNegPerc,
     neuPercentage: tagNeuPerc,
-    unkPercentage: tagUnkPerc,
   } = calcSentStats(taggedPosts);
+
+  const posVsAvg = posPercentage - posPercAll;
+  const negVsAvg = negPercentage - negPercAll;
+  const neuVsAvg = neuPercentage - neuPercAll;
 
   return (
     <Container className='sentiment-body-container'>
-      <Row>
-        <h2 className='dashboard-heading'>Sentiment Overview</h2>
+      <Row className=''>
+        <div className='d-flex justify-content-between align-items-center'>
+          <h2 className='dashboard-heading'>Sentiment Overview</h2>
+          <div className='card-wrapper overview-card-title'>
+            Last updated: {posts.length > 0 && formatDate(posts[0].igTimestamp)}
+          </div>
+        </div>
       </Row>
 
       <div className='section-outer-wrapper'>
@@ -209,9 +188,6 @@ export default function SentimentOverview({ userData }) {
                     </Dropdown.Item>
                   </DropdownButton>
                 </div>
-                <div className='card-wrapper overview-card-title'>
-                  Last updated:
-                </div>
               </div>
             </Col>
           </Row>
@@ -227,14 +203,7 @@ export default function SentimentOverview({ userData }) {
                     <Card.Text className='card-number'>
                       {totalComments}
                     </Card.Text>
-                    <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
-                    </Card.Text>
+                    <Card.Text className='d-flex card-bottom-wrapper align-items-center'></Card.Text>
                   </div>
                 </div>
               </Card>
@@ -252,12 +221,11 @@ export default function SentimentOverview({ userData }) {
                       {posPercentage}%
                     </Card.Text>
                     <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
+                      <div className='card-bottom-percent'>
+                        {posVsAvg >= 0 && '+'}
+                        {posVsAvg}%
+                      </div>
+                      <div className='card-bottom-text ms-1'>(vs. avg)</div>
                     </Card.Text>
                   </div>
                 </div>
@@ -275,12 +243,11 @@ export default function SentimentOverview({ userData }) {
                       {negPercentage}%
                     </Card.Text>
                     <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
+                      <div className='card-bottom-percent'>
+                        {negVsAvg >= 0 && '+'}
+                        {negVsAvg}%
+                      </div>
+                      <div className='card-bottom-text ms-1'>(vs. avg)</div>
                     </Card.Text>
                   </div>
                 </div>
@@ -294,35 +261,15 @@ export default function SentimentOverview({ userData }) {
                   </div>
                   <div>
                     <h6 className='card-title'>Neutral Comments</h6>
-                    <Card.Text className='card-number'>{neuComments}</Card.Text>
-                    <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
+                    <Card.Text className='card-number'>
+                      {neuPercentage}%
                     </Card.Text>
-                  </div>
-                </div>
-              </Card>
-            </Col>
-            <Col xs={3}>
-              <Card className='overview-card-box'>
-                <div className='d-flex card-wrapper align-items-center'>
-                  <div className='icon-container icon-container-orange d-flex align-items-center justify-content-center'>
-                    <Question className='card-icon-orange' size={28} />
-                  </div>
-                  <div>
-                    <h6 className='card-title'>Unknown Comments</h6>
-                    <Card.Text className='card-number'>{unkComments}</Card.Text>
                     <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
+                      <div className=''>
+                        {neuVsAvg >= 0 && '+'}
+                        {neuVsAvg}%
+                      </div>
+                      <div className='card-bottom-text ms-1'>(vs. avg)</div>
                     </Card.Text>
                   </div>
                 </div>
@@ -330,10 +277,20 @@ export default function SentimentOverview({ userData }) {
             </Col>
           </Row>
           <Row>
-            <BarChart
-              posPercentage={posPercentage}
-              negPercentage={negPercentage}
-            />
+            <Col xs={4}>
+              <div className='overview-barchart-wrapper'>
+                <BarChart
+                  posPercentage={posPercentage}
+                  negPercentage={negPercentage}
+                  neuPercentage={neuPercentage}
+                />
+              </div>
+            </Col>
+            <Col xs={8}>
+              <div className='overview-linechart-wrapper'>
+                <SentimentLineChart posts={datePosts} />
+              </div>
+            </Col>
           </Row>
         </div>
       </div>
@@ -372,166 +329,153 @@ export default function SentimentOverview({ userData }) {
             </Col>
           </Row>
           <Row>
-            <Col xs={3}>
-              <Card className='overview-card-box'>
-                <div className='d-flex card-wrapper align-items-center'>
-                  <div className='icon-container icon-container-purple d-flex align-items-center justify-content-center'>
-                    <ChatDots className='card-icon-purple' size={28} />
+            <Col xs={6} className='d-flex flex-wrap'>
+              <Col className='tag-column' xs={6}>
+                <Card className='overview-card-box'>
+                  <div className='d-flex card-wrapper align-items-center'>
+                    <div className='icon-container icon-container-purple d-flex align-items-center justify-content-center'>
+                      <ChatDots className='card-icon-purple' size={28} />
+                    </div>
+                    <div>
+                      <h6 className='card-title'>Total Posts</h6>
+                      <Card.Text className='card-number'>
+                        {taggedPosts.length}
+                      </Card.Text>
+                      <Card.Text className='d-flex card-bottom-wrapper align-items-center'></Card.Text>
+                    </div>
                   </div>
-                  <div>
-                    <h6 className='card-title'>Total Posts</h6>
-                    <Card.Text className='card-number'>
-                      {taggedPosts.length}
-                    </Card.Text>
-                    <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
-                    </Card.Text>
+                </Card>
+              </Col>
+              <Col className='tag-column' xs={6}>
+                <Card className='overview-card-box'>
+                  <div className='d-flex card-wrapper align-items-center'>
+                    <div className='icon-container icon-container-teal d-flex align-items-center justify-content-center'>
+                      <ChatHeart className='card-icon-teal' size={28} />
+                    </div>
+                    <div>
+                      <h6 className='card-title'>Engagement</h6>
+                      <Card.Text className='card-number'>
+                        {calcEngagementForList(userData, taggedPosts)}%
+                      </Card.Text>
+                      <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
+                        <div className='card-bottom-percent'>
+                          {(
+                            calcEngagementForList(userData, taggedPosts) -
+                            calcEngagementForList(userData, posts)
+                          ).toFixed(2) >= 0 && '+'}
+                          {(
+                            calcEngagementForList(userData, taggedPosts) -
+                            calcEngagementForList(userData, posts)
+                          ).toFixed(2)}
+                          %
+                        </div>
+                        <div className='card-bottom-text ms-1'>(vs. all)</div>
+                      </Card.Text>
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </Col>
+              <Col className='tag-column' xs={6}>
+                <Card className='overview-card-box'>
+                  <div className='d-flex card-wrapper align-items-center'>
+                    <div className='icon-container icon-container-lime d-flex align-items-center justify-content-center'>
+                      <ChatDots className='card-icon-lime' size={28} />
+                    </div>
+                    <div>
+                      <h6 className='card-title'>Comments per Post</h6>
+                      <Card.Text className='card-number'>
+                        {Math.round(tagTotalComments / taggedPosts.length)}
+                      </Card.Text>
+                      <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
+                        <div className='card-bottom-percent'>
+                          {Math.round(tagTotalComments / taggedPosts.length) -
+                            Math.round(totalCommentsAll / posts.length) >=
+                            0 && '+'}
+                          {Math.round(tagTotalComments / taggedPosts.length) -
+                            Math.round(totalCommentsAll / posts.length)}
+                        </div>
+                        <div className='card-bottom-text ms-1'>(vs. all)</div>
+                      </Card.Text>
+                    </div>
+                  </div>
+                </Card>
+              </Col>
+              <Col className='tag-column' xs={6}>
+                <Card className='overview-card-box'>
+                  <div className='d-flex card-wrapper align-items-center'>
+                    <div className='icon-container icon-container-green d-flex align-items-center justify-content-center'>
+                      <EmojiGrin className='card-icon-green' size={28} />
+                    </div>
+                    <div>
+                      <h6 className='card-title'>Positive Comments</h6>
+                      <Card.Text className='card-number'>
+                        {tagPosPerc}%
+                      </Card.Text>
+                      <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
+                        <div className='card-bottom-percent'>
+                          {tagPosPerc - posPercAll >= 0 && '+'}
+                          {tagPosPerc - posPercAll}%
+                        </div>
+                        <div className='card-bottom-text ms-1'>(vs. all)</div>
+                      </Card.Text>
+                    </div>
+                  </div>
+                </Card>
+              </Col>
+              <Col className='tag-column' xs={6}>
+                <Card className='overview-card-box'>
+                  <div className='d-flex card-wrapper align-items-center'>
+                    <div className='icon-container icon-container-red d-flex align-items-center justify-content-center'>
+                      <PatchExclamation className='card-icon-red' size={28} />
+                    </div>
+                    <div>
+                      <h6 className='card-title'>Negative Comments</h6>
+                      <Card.Text className='card-number'>
+                        {tagNegPerc}%
+                      </Card.Text>
+                      <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
+                        <div className='card-bottom-percent'>
+                          {tagNegPerc - negPercAll >= 0 && '+'}
+                          {tagNegPerc - negPercAll}%
+                        </div>
+                        <div className='card-bottom-text ms-1'>(vs. all)</div>
+                      </Card.Text>
+                    </div>
+                  </div>
+                </Card>
+              </Col>
+              <Col className='tag-column' xs={6}>
+                <Card className='overview-card-box'>
+                  <div className='d-flex card-wrapper align-items-center'>
+                    <div className='icon-container icon-container-blue d-flex align-items-center justify-content-center'>
+                      <EmojiNeutral className='card-icon-blue' size={28} />
+                    </div>
+                    <div>
+                      <h6 className='card-title'>Neutral Comments</h6>
+                      <Card.Text className='card-number'>
+                        {tagNeuPerc}%
+                      </Card.Text>
+                      <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
+                        <div className='card-bottom-percent'>
+                          {tagNeuPerc - neuPercAll >= 0 && '+'}
+                          {tagNeuPerc - neuPercAll}%
+                        </div>
+                        <div className='card-bottom-text ms-1'>(vs. all)</div>
+                      </Card.Text>
+                    </div>
+                  </div>
+                </Card>
+              </Col>
             </Col>
-            <Col xs={3}>
-              <Card className='overview-card-box'>
-                <div className='d-flex card-wrapper align-items-center'>
-                  <div className='icon-container icon-container-teal d-flex align-items-center justify-content-center'>
-                    <ChatHeart className='card-icon-teal' size={28} />
-                  </div>
-                  <div>
-                    <h6 className='card-title'>Engagement</h6>
-                    <Card.Text className='card-number'>
-                      {calcEngagementForList(userData, taggedPosts)}%
-                    </Card.Text>
-                    <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
-                    </Card.Text>
-                  </div>
-                </div>
-              </Card>
+            <Col xs={6}>
+              <div className='tag-barchart-wrapper'>
+                <BarChart
+                  posPercentage={tagPosPerc}
+                  negPercentage={tagNegPerc}
+                  neuPercentage={tagNeuPerc}
+                />
+              </div>
             </Col>
-            <Col xs={3}>
-              <Card className='overview-card-box'>
-                <div className='d-flex card-wrapper align-items-center'>
-                  <div className='icon-container icon-container-lime d-flex align-items-center justify-content-center'>
-                    <ChatDots className='card-icon-lime' size={28} />
-                  </div>
-                  <div>
-                    <h6 className='card-title'>Comments per Post</h6>
-                    <Card.Text className='card-number'>
-                      {Math.round(tagTotalComments / taggedPosts.length)}
-                    </Card.Text>
-                    <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
-                    </Card.Text>
-                  </div>
-                </div>
-              </Card>
-            </Col>
-            <Col xs={3}>
-              <Card className='overview-card-box'>
-                <div className='d-flex card-wrapper align-items-center'>
-                  <div className='icon-container icon-container-green d-flex align-items-center justify-content-center'>
-                    <EmojiGrin className='card-icon-green' size={28} />
-                  </div>
-                  <div>
-                    <h6 className='card-title'>Positive Comments</h6>
-                    <Card.Text className='card-number'>{tagPosPerc}%</Card.Text>
-                    <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
-                    </Card.Text>
-                  </div>
-                </div>
-              </Card>
-            </Col>
-            <Col xs={3}>
-              <Card className='overview-card-box'>
-                <div className='d-flex card-wrapper align-items-center'>
-                  <div className='icon-container icon-container-red d-flex align-items-center justify-content-center'>
-                    <PatchExclamation className='card-icon-red' size={28} />
-                  </div>
-                  <div>
-                    <h6 className='card-title'>Negative Comments</h6>
-                    <Card.Text className='card-number'>{tagNegPerc}%</Card.Text>
-                    <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
-                    </Card.Text>
-                  </div>
-                </div>
-              </Card>
-            </Col>
-            <Col xs={3}>
-              <Card className='overview-card-box'>
-                <div className='d-flex card-wrapper align-items-center'>
-                  <div className='icon-container icon-container-blue d-flex align-items-center justify-content-center'>
-                    <EmojiNeutral className='card-icon-blue' size={28} />
-                  </div>
-                  <div>
-                    <h6 className='card-title'>Neutral Comments</h6>
-                    <Card.Text className='card-number'>
-                      {tagNeuComments}
-                    </Card.Text>
-                    <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
-                    </Card.Text>
-                  </div>
-                </div>
-              </Card>
-            </Col>
-            <Col xs={3}>
-              <Card className='overview-card-box'>
-                <div className='d-flex card-wrapper align-items-center'>
-                  <div className='icon-container icon-container-orange d-flex align-items-center justify-content-center'>
-                    <Question className='card-icon-orange' size={28} />
-                  </div>
-                  <div>
-                    <h6 className='card-title'>Unknown Comments</h6>
-                    <Card.Text className='card-number'>
-                      {tagUnkComments}
-                    </Card.Text>
-                    <Card.Text className='d-flex card-bottom-wrapper align-items-center'>
-                      <ArrowUpShort
-                        className='card-bottom-arrow-green'
-                        size={20}
-                      />
-                      <div className='card-bottom-percent'>+2.31%</div>
-                      <div className='card-bottom-text ms-1'>(30 days)</div>
-                    </Card.Text>
-                  </div>
-                </div>
-              </Card>
-            </Col>
-          </Row>
-          <Row>
-            <BarChart posPercentage={tagPosPerc} negPercentage={tagNegPerc} />
           </Row>
         </div>
       </div>

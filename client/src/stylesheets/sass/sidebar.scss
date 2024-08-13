@@ -28,6 +28,16 @@
   color: #9aa4ca;
 }
 
+.sidebar-item:focus {
+  color: #0a58ca;
+  background-color: #fff;
+}
+
+.sidebar-item:hover {
+  color: #0a58ca;
+  background-color: #fff;
+}
+
 .sidebar-icon-container {
   width: 24px;
   display: inline-block;

@@ -5,7 +5,11 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.js';
 import axios from 'axios';
 
-import { formatDate, calcEngagement } from '../util/functions.js';
+import {
+  formatDate,
+  calcEngagement,
+  calculateSentimentPercentages,
+} from '../util/functions.js';
 
 export default function AllPostAnalysis({ userData }) {
   const { state, dispatch } = useContext(AuthContext);
@@ -28,25 +32,9 @@ export default function AllPostAnalysis({ userData }) {
         const fetchedPosts = response.data;
         setPosts(fetchedPosts);
 
-        const percentages_holder = fetchedPosts.map((post) => {
-          const commentsCount =
-            post.sentiment.positive + post.sentiment.negative;
-
-          const posPercent = post.sentiment.positive / commentsCount;
-          const negPercent = post.sentiment.negative / commentsCount;
-          const neuPercent = 0.32; // Example values
-          const unkPercent = 0.17; // Example values
-
-          return {
-            posPercent,
-            negPercent,
-            neuPercent,
-            unkPercent,
-            x: 'x',
-            y: 'y',
-          };
-        });
-
+        const percentages_holder = fetchedPosts.map(
+          calculateSentimentPercentages
+        );
         setPercentages(percentages_holder);
         setLoading(false);
       } catch (error) {
@@ -61,11 +49,14 @@ export default function AllPostAnalysis({ userData }) {
 
   return (
     <Container className='posts-body-container'>
-      <Row>
-        <h2 className='dashboard-heading'>
-          Latest Posts -{' '}
-          <span style={{ fontWeight: '300' }}>(Click Post for Details)</span>
-        </h2>
+      <Row className=''>
+        <div className='d-flex justify-content-between align-items-center'>
+          <h2 className='dashboard-heading'>
+            Latest Posts -{' '}
+            <span style={{ fontWeight: '300' }}>(Click Post for Details)</span>
+          </h2>
+          <div className='card-wrapper overview-card-title'>Last updated:</div>
+        </div>
       </Row>
       <div className='posts-table-outercontainer'>
         <div className='posts-table-innercontainer'>
@@ -85,20 +76,14 @@ export default function AllPostAnalysis({ userData }) {
             <Col className='table-label' xs={1}>
               Engage
             </Col>
-            <Col className='table-label' xs={1}>
-              Pos
-            </Col>
-            <Col className='table-label' xs={1}>
-              Neg
-            </Col>
-            <Col className='table-label' xs={1}>
-              Neu
-            </Col>
-            <Col className='table-label' xs={1}>
-              Unk
+            <Col className='table-label' xs={2}>
+              Positive
             </Col>
             <Col className='table-label' xs={2}>
-              Graph
+              Negative
+            </Col>
+            <Col className='table-label' xs={2}>
+              Neutral
             </Col>
           </Row>
           {posts.map((post, index) => (
@@ -132,19 +117,15 @@ export default function AllPostAnalysis({ userData }) {
                   )}
                   %
                 </Col>
-                <Col className='table-text' xs={1}>
+                <Col className='table-text' xs={2}>
                   {Math.round(percentages[index].posPercent * 100)}%
                 </Col>
-                <Col className='table-text' xs={1}>
+                <Col className='table-text' xs={2}>
                   {Math.round(percentages[index].negPercent * 100)}%
                 </Col>
-                <Col className='table-text' xs={1}>
+                <Col className='table-text' xs={2}>
                   {Math.round(percentages[index].neuPercent * 100)}%
                 </Col>
-                <Col className='table-text' xs={1}>
-                  {Math.round(percentages[index].unkPercent * 100)}%
-                </Col>
-                <Col className='table-text' xs={1}></Col>
               </Row>
             </Link>
           ))}

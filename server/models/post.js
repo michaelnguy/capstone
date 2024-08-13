@@ -12,6 +12,7 @@ const postSchema = new mongoose.Schema({
   sentiment: {
     positive: { type: Number },
     negative: { type: Number },
+    neutral: { type: Number },
   },
   tags: [{ type: String }],
   owner: {

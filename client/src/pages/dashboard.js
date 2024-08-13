@@ -26,6 +26,7 @@ import Overview from '../components/Overview';
 import SentimentOverview from '../components/SentimentOverview';
 import SinglePostAnalysis from '../components/SinglePostAnalysis';
 import AllPostAnalysis from '../components/AllPostAnalysis';
+import Hashtag from '../components/Hashtag';
 
 export default function Dashboard() {
   const [open, setOpen] = useState(false);
@@ -116,38 +117,11 @@ export default function Dashboard() {
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
-              <hr />
-              <Dropdown className='pb-3'>
-                <Dropdown.Toggle
-                  variant='dark'
-                  className='d-flex align-items-center text-white text-decoration-none'
-                  id='dropdownUser1'
-                >
-                  <img
-                    src='https://github.com/mdo.png'
-                    alt=''
-                    width='32'
-                    height='32'
-                    className='rounded-circle me-2'
-                  />
-                  <strong>mdo</strong>
-                </Dropdown.Toggle>
-                <Dropdown.Menu
-                  className='dropdown-menu-dark text-small shadow'
-                  aria-labelledby='dropdownUser1'
-                >
-                  <Dropdown.Item href='#'>New project...</Dropdown.Item>
-                  <Dropdown.Item href='#'>Settings</Dropdown.Item>
-                  <Dropdown.Item href='#'>Profile</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item href='#'>Sign out</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
             </Container>
           </Col>
           {/* -----------------END SIDEBAR--------------- */}
           <Col className='px-0 dashboard-content' xs={10}>
-            <TopNavbar />
+            <TopNavbar userData={userData} />
             <Routes>
               <Route path='/dashboard' element={<Overview />} />
               <Route
@@ -162,10 +136,7 @@ export default function Dashboard() {
                 path='/posts/:postId'
                 element={<SinglePostAnalysis userData={userData} />}
               />
-              <Route
-                path='/hashtag'
-                element={<div>Hashtag Recommendation Component</div>}
-              />
+              <Route path='/hashtag' element={<Hashtag />} />
               {/* Default route */}
               <Route path='' element={<Navigate to='dashboard' />} />
             </Routes>

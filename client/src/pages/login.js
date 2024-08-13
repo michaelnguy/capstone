@@ -43,8 +43,8 @@ export default function Login(props) {
 
   return (
     <Container>
-      <Row className='mt-5 py-5 justify-content-center'>
-        <Col className='bg-white' sm={8} md={6} lg={4}>
+      <Row className='mt-5 justify-content-center align-items-center'>
+        <div className='auth-wrapper'>
           <h1 className='text-center'>Login</h1>
           <Form onSubmit={uploadFields}>
             <Form.Group>
@@ -72,7 +72,7 @@ export default function Login(props) {
               />
             </Form.Group>
 
-            <div className='text-center'>
+            <div className='text-center mt-4'>
               <Button variant='success' type='submit'>
                 Login
               </Button>
@@ -93,7 +93,7 @@ export default function Login(props) {
               </ul>
             </div>
           )}
-        </Col>
+        </div>
       </Row>
     </Container>
   );

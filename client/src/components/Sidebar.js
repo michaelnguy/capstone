@@ -70,32 +70,6 @@ function Sidebar() {
         </Nav.Item>
       </Nav>
       <hr />
-      <Dropdown className='pb-3'>
-        <Dropdown.Toggle
-          variant='dark'
-          className='d-flex align-items-center text-white text-decoration-none'
-          id='dropdownUser1'
-        >
-          <img
-            src='https://github.com/mdo.png'
-            alt=''
-            width='32'
-            height='32'
-            className='rounded-circle me-2'
-          />
-          <strong>mdo</strong>
-        </Dropdown.Toggle>
-        <Dropdown.Menu
-          className='dropdown-menu-dark text-small shadow'
-          aria-labelledby='dropdownUser1'
-        >
-          <Dropdown.Item href='#'>New project...</Dropdown.Item>
-          <Dropdown.Item href='#'>Settings</Dropdown.Item>
-          <Dropdown.Item href='#'>Profile</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item href='#'>Sign out</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
     </Container>
   );
 }
