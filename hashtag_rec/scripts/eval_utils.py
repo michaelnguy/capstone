@@ -17,11 +17,12 @@ def calculate_eval_metrics(gt_tags, pred_tags):
     rec = num_correct / len(gt_tags)
     return acc,prec,rec
 
-def evaluate_recommendations(pred_df, K=np.arange(5)+1, ret_dict=False):
+def evaluate_recommendations(pred_df, K=np.arange(5)+1, skip_larger_k=False, ret_dict=False):
     """
     Calculate evaluation metrics accuracy@K, precision@K, and recall@K for the given dataset
 
     :param pred_df: pandas DataFrame containing ground truth tags and recommended tags for each image in the dataset
+    :param skip_larger_k: whether to skip calculating a metric @ k when k is larger than the number of ground truth tags for a given image
     :param K: iterable of k-values to calculate the evaluation metrics @ k for
     :param ret_dict: whether to return dict of image-wise evaluation metrics
 
@@ -54,6 +55,8 @@ def evaluate_recommendations(pred_df, K=np.arange(5)+1, ret_dict=False):
         pred_tags = row[PRED_COL]
 
         for k in K:
+            if k > len(gt_tags) and skip_larger_k:
+                continue
             img_acc,img_prec,img_rec = calculate_eval_metrics(gt_tags, pred_tags[:k])
             acc[k].append(img_acc)
             prec[k].append(img_prec)
