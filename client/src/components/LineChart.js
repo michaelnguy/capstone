@@ -106,7 +106,7 @@ export default function SimpleLineChart({ followerData, posts, chartType }) {
     <ResponsiveLine
       data={chartData}
       colors={selectedColor}
-      margin={{ top: 50, right: 110, bottom: 50, left: 75 }}
+      margin={{ top: 50, right: 110, bottom: 50, left: 120 }}
       xScale={{ type: 'point' }}
       yScale={{
         type: 'linear',

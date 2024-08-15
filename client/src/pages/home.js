@@ -10,7 +10,6 @@ import name from '../images/name.png';
 import botleft from '../images/botleft.png';
 import botright from '../images/botright.png';
 import top from '../images/top.png';
-import holder from '../images/holder_image.avif';
 import aws from '../images/aws.svg';
 import jupyter from '../images/jupyter.webp';
 import mongo from '../images/mongo.svg';
@@ -37,7 +36,9 @@ export default function Home() {
               <img className='home-logo' src={logo} />
               <img className='home-name' src={name} />
             </div>
-            <a className='primary-button'>Open VibeMetrics</a>
+            <a className='primary-button' href='/app'>
+              Open VibeMetrics
+            </a>
           </Col>
         </Row>
         <Row className='hero-row'>
@@ -52,7 +53,9 @@ export default function Home() {
               most accurate feedback.
             </p>
             <p className='subheading'></p>
-            <a className='primary-button'>Open VibeMetrics</a>
+            <a className='primary-button' href='/app'>
+              Open VibeMetrics
+            </a>
           </Col>
           <Col className='d-flex justify-content-center pt-5' xs={6}>
             <div>

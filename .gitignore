@@ -1,4 +1,5 @@
 node_modules
+node_modules/
 predict_server/HARRISON/
 .env
-.vscode
+/.vscode
