@@ -13,29 +13,10 @@ export default function Hashtag() {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   setLoading(true);
-  //   try {
-  //     const response = await axios.post(
-  //       'http://localhost:3001/get_hashtags',
-  //       {
-  //         image_url: imageUrl,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
-  //         },
-  //       }
-  //     );
-  //     setHashtags(response.data.tags[0]);
-  //     setError(null);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     setError('There was an error processing your request.');
-  //     setLoading(false);
-  //   }
-  // };
+  function extractHashtagLabel(label) {
+    const match = label.match(/^[^,\s]+/);
+    return match ? match[0] : label;
+  }
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -55,6 +36,13 @@ export default function Hashtag() {
 
     try {
       const data = await file.arrayBuffer(); // Convert the file to an ArrayBuffer
+
+      if (file) {
+        const data = await file.arrayBuffer();
+        const blob = new Blob([data], { type: file.type });
+        const url = URL.createObjectURL(blob);
+        setImageUrl(url);
+      }
 
       const response = await axios.post(
         'https://api-inference.huggingface.co/models/google/vit-base-patch16-224',
@@ -104,7 +92,14 @@ export default function Hashtag() {
                 </Button>
               </Form>
               {/* Display error message if there's an error */}
-              {error && <p className='text-danger mt-2'>{error}</p>}
+              {error && (
+                <p className='text-danger mt-2'>
+                  {error ===
+                  'Model google/vit-base-patch16-224 is currently loading'
+                    ? `${error}. Please wait 10 seconds and submit again.`
+                    : error}
+                </p>
+              )}
             </Col>
           </Row>
           <Row>
@@ -116,7 +111,7 @@ export default function Hashtag() {
                   <h5>Recommended Hashtags:</h5>
                   <ul>
                     {hashtags.map((hashtag, index) => (
-                      <li key={index}>#{hashtag.label}</li>
+                      <li key={index}>#{extractHashtagLabel(hashtag.label)}</li>
                     ))}
                   </ul>
                 </div>

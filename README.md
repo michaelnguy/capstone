@@ -10,7 +10,9 @@ This repo consists of 5 separate directories: a React web client, a Node.js back
 
 ### Data Sources
 
-1. The hashtag_rec portion of the project requires the HARRISON dataset from Park et al. A Google drive link to the dataset can be found [here](https://drive.google.com/file/d/1m3u0vVw-DzaVsQNvyW_PtbMKZjzEAsC2/view?usp=sharing)(link only available to University of Michigan accounts).
+#### Hashtag Recommendation
+
+1. The hashtag_rec portion of the project requires the HARRISON dataset from Park et al. This dataset is openly on kaggle and github [here](https://github.com/minstone/HARRISON-Dataset). For convenience, a Google drive link to the dataset can be found [here](https://drive.google.com/file/d/1m3u0vVw-DzaVsQNvyW_PtbMKZjzEAsC2/view?usp=sharing)(link only available to University of Michigan accounts).
 
 2. Unzip the folder and copy its contents to the preexisting empty HARRISON folder.
 
@@ -27,6 +29,10 @@ This repo consists of 5 separate directories: a React web client, a Node.js back
     data_list.txt
     tag_list.txt
 ```
+
+#### Sentiment Analysis
+
+1. The Sentiment Analysis portion of the project required data from K. Chai and and P. Kashish, but are already included in this repo. These datasets are openly available [here](https://www.kaggle.com/datasets/cosmos98/twitter-and-reddit-sentimental-analysis-dataset/data) and [here](https://www.kaggle.com/datasets/kashishparmar02/social-media-sentiments-analysis-dataset/data).
 
 ### Requirements
 
@@ -102,4 +108,8 @@ pip install -r requirements.txt
 
 ## Data Sources
 
-Park et al., "HARRISON: A Benchmark on HAshtag Recommendation for Real-world Images in Social Networks," ArXiv, 2016
+Charan Gowda, Anirudh, Akshay Pai, and Chaithanya kumar A. (2019). Twitter and Reddit Sentimental analysis Dataset [Data set]. Kaggle.
+
+Kashish Parmar. (2024) Social Media Sentiments Analysis Dataset [Data set]. Kaggle.
+
+Park, M., Li, H., & Kim, J. (2016). "HARRISON: A Benchmark on HAshtag Recommendation for Real-world Images in Social Networks," ArXiv.

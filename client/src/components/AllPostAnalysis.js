@@ -15,7 +15,7 @@ const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 export default function AllPostAnalysis({ userData }) {
   const { user, state, dispatch } = useContext(AuthContext);
-  // console.log(user);
+  const path = user.email === 'tide@email.com' ? 'igDemoTide' : 'igDemo';
 
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -109,7 +109,7 @@ export default function AllPostAnalysis({ userData }) {
                 <Col className='table-label' xs={1}>
                   <img
                     style={{ height: '50px', width: '40px' }}
-                    src={require(`../images/igDemo/${index + 1}.jpg`)}
+                    src={require(`../images/${path}/${index + 1}.jpg`)}
                     alt='post'
                   />
                 </Col>

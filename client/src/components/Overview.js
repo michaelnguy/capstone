@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { Container, Row, Col, DropdownButton, Dropdown } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
@@ -11,7 +11,8 @@ import {
 } from 'react-bootstrap-icons';
 import axios from 'axios';
 
-import userData from '../dummyData/barber.json';
+import dummyData from '../dummyData/user.json';
+import { AuthContext } from '../context/auth';
 import {
   calcCommentsPerPost,
   calcEngagementForList,
@@ -23,6 +24,14 @@ import SimpleLineChart from './LineChart';
 const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 export default function Overview() {
+  const { user, state, dispatch } = useContext(AuthContext);
+  let userData;
+  if (user.email === 'tide@email.com') {
+    userData = dummyData.tide;
+  } else {
+    userData = dummyData['12pell'];
+  }
+
   const [posts, setPosts] = useState([]);
   const [chartType, setChartType] = useState('Followers');
   const [loading, setLoading] = useState(false);

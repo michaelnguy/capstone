@@ -6,11 +6,11 @@ const Post = mongoose.model('Post');
 const User = mongoose.model('User');
 const axios = require('axios');
 
-const dummyPosts = require('../util/dummyPosts');
+const dummyPosts = require('../util/dummyPostsTide');
 
 router.post('/create_dummy_data', requireLogin, async (req, res) => {
   try {
-    // await Post.deleteMany({ owner: req.user._id });
+    await Post.deleteMany({ owner: req.user._id });
 
     for (let i = 0; i < dummyPosts.length; i++) {
       let {
@@ -31,6 +31,7 @@ router.post('/create_dummy_data', requireLogin, async (req, res) => {
         });
 
         // Handle the response from the Flask server
+
         console.log(response.data);
       } catch (error) {
         console.error('Error making request to Flask server:', error);

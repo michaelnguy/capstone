@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Outlet, Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import {
   Container,
@@ -17,7 +17,8 @@ import {
 } from 'react-bootstrap-icons';
 import axios from 'axios';
 
-import userData from '../dummyData/barber.json';
+import { AuthContext } from '../context/auth';
+import dummyData from '../dummyData/user.json';
 import name from '../images/name.png';
 import logo from '../images/logo.png';
 
@@ -29,6 +30,14 @@ import AllPostAnalysis from '../components/AllPostAnalysis';
 import Hashtag from '../components/Hashtag';
 
 export default function Dashboard() {
+  const { user, state, dispatch } = useContext(AuthContext);
+  let userData;
+  if (user.email === 'tide@email.com') {
+    userData = dummyData.tide;
+  } else {
+    userData = dummyData['12pell'];
+  }
+
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();

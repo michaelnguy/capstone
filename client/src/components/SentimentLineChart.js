@@ -1,20 +1,21 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-
 import { createSentimentDataStructure } from '../util/functions';
 
 export default function SentimentLineChart({ posts }) {
   const sentimentData = createSentimentDataStructure(posts);
 
-  const tickValues = sentimentData[0].data
-    .filter((_, index) => index % 10 === 0)
-    .map((d) => d.x);
+  const tickValues = 'every 20 days';
 
   const MyResponsiveLine = () => (
     <ResponsiveLine
       data={sentimentData}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-      xScale={{ type: 'point' }}
+      xScale={{
+        type: 'time',
+        format: '%Y-%m-%d %H:%M',
+        precision: 'minute',
+      }}
       yScale={{
         type: 'linear',
         min: 'auto',
@@ -27,13 +28,13 @@ export default function SentimentLineChart({ posts }) {
       axisTop={null}
       axisRight={null}
       axisBottom={{
+        format: '%b %d',
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
         legend: 'Date',
         legendOffset: 36,
         legendPosition: 'middle',
-        truncateTickAt: 10,
         tickValues: tickValues,
       }}
       axisLeft={{
@@ -43,11 +44,10 @@ export default function SentimentLineChart({ posts }) {
         legend: 'Percentage',
         legendOffset: -40,
         legendPosition: 'middle',
-        truncateTickAt: 0,
       }}
       colors={['#219653', '#365cf5', '#d50100']}
-      enablePoints={false}
-      pointSize={10}
+      enablePoints={true}
+      pointSize={5}
       pointColor={{ theme: 'background' }}
       pointBorderWidth={2}
       pointBorderColor={{ from: 'serieColor' }}

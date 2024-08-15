@@ -9,7 +9,9 @@ import logo from '../images/logo.png';
 import name from '../images/name.png';
 import botleft from '../images/botleft.png';
 import botright from '../images/botright.png';
-import top from '../images/top.png';
+import dashboard from '../images/Dashboard.png';
+import sentimentList from '../images/SentimentList.png';
+import hashtag from '../images/Hashtag.png';
 import aws from '../images/aws.svg';
 import jupyter from '../images/jupyter.webp';
 import mongo from '../images/mongo.svg';
@@ -123,7 +125,7 @@ export default function Home() {
             </Col>
             <Col xs={7} style={{ paddingLeft: '0px', paddingRight: '0px' }}>
               <div className='feature-image-wrapper'>
-                <img className='feature-image-top' src={top} />
+                <img className='feature-image-top' src={dashboard} />
               </div>
             </Col>
           </Row>
@@ -142,7 +144,7 @@ export default function Home() {
                   In one click, see the sentiment of posts that you've made.
                 </p>
                 <div className='image-wrapper-botleft'>
-                  <img src={botleft} className='feature-image-botleft' />
+                  <img src={sentimentList} className='feature-image-botleft' />
                 </div>
               </div>
             </Col>
@@ -156,7 +158,7 @@ export default function Home() {
                 </p>
                 <div className='image-wrapper-botright d-flex '>
                   <img
-                    src={botright}
+                    src={hashtag}
                     className='feature-image-botright mx-auto'
                   />
                 </div>

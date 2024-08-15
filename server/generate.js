@@ -1,4 +1,4 @@
-const dummyPosts = require('./util/dummyPosts');
+const dummyPosts = require('./util/dummyPostsTide');
 
 // Function to generate Instagram URL for each post
 const generateInstagramUrls = (posts) => {

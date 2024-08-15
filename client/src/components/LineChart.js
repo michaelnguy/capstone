@@ -1,6 +1,5 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-
 import { calcEngagement, formatDate } from '../util/functions.js';
 
 export default function SimpleLineChart({ followerData, posts, chartType }) {
@@ -19,10 +18,10 @@ export default function SimpleLineChart({ followerData, posts, chartType }) {
       : '';
 
   const chartColors = {
-    Followers: '#9b51e0', // Blue
-    Engagement: '#365cf5', // Green
-    Comments: '#f2994a', // Red
-    Likes: '#219653', // Orange
+    Followers: '#9b51e0',
+    Engagement: '#365cf5',
+    Comments: '#f2994a',
+    Likes: '#219653',
   };
 
   const selectedColor = chartColors[chartType] || '#000';
@@ -33,14 +32,13 @@ export default function SimpleLineChart({ followerData, posts, chartType }) {
         id: 'Followers',
         data: Object.entries(followerData.followers).map(
           ([date, followers]) => ({
-            x: date,
+            x: new Date(date), // Convert to Date object
             y: followers,
           })
         ),
       },
     ];
-    const dates = Object.keys(followerData.followers);
-    tickValues = dates.filter((_, index) => index % 5 === 0);
+    tickValues = 'every 5 days'; // Customize as needed
   } else if (chartType === 'Engagement') {
     chartData = [
       {
@@ -52,54 +50,41 @@ export default function SimpleLineChart({ followerData, posts, chartType }) {
               post.likes,
               post.comments.length
             );
-            const date = post.igTimestamp;
             return {
-              x: formatDate(date),
+              x: new Date(post.igTimestamp), // Convert to Date object
               y: engagement,
             };
           })
           .reverse(),
       },
     ];
-
-    const dates = chartData[0].data.map((dataPoint) => dataPoint.x);
-    tickValues = dates.filter((_, index) => index % 10 === 0);
+    tickValues = 'every 10 days'; // Customize as needed
   } else if (chartType === 'Comments') {
     chartData = [
       {
         id: 'Comments',
         data: posts
-          .map((post) => {
-            const comments = post.comments.length;
-            const date = post.igTimestamp;
-            return {
-              x: formatDate(date),
-              y: comments,
-            };
-          })
+          .map((post) => ({
+            x: new Date(post.igTimestamp), // Convert to Date object
+            y: post.comments.length,
+          }))
           .reverse(),
       },
     ];
-    const dates = chartData[0].data.map((dataPoint) => dataPoint.x);
-    tickValues = dates.filter((_, index) => index % 10 === 0);
+    tickValues = 'every 10 days'; // Customize as needed
   } else if (chartType === 'Likes') {
     chartData = [
       {
         id: 'Likes',
         data: posts
-          .map((post) => {
-            const likes = post.likes;
-            const date = post.igTimestamp;
-            return {
-              x: formatDate(date),
-              y: likes,
-            };
-          })
+          .map((post) => ({
+            x: new Date(post.igTimestamp), // Convert to Date object
+            y: post.likes,
+          }))
           .reverse(),
       },
     ];
-    const dates = chartData[0].data.map((dataPoint) => dataPoint.x);
-    tickValues = dates.filter((_, index) => index % 10 === 0);
+    tickValues = 'every 10 days'; // Customize as needed
   }
 
   const MyResponsiveLine = () => (
@@ -107,7 +92,11 @@ export default function SimpleLineChart({ followerData, posts, chartType }) {
       data={chartData}
       colors={selectedColor}
       margin={{ top: 50, right: 110, bottom: 50, left: 120 }}
-      xScale={{ type: 'point' }}
+      xScale={{
+        type: 'time', // Change to time scale
+        format: '%Y-%m-%d %H:%M',
+        precision: 'minute', // Adjust precision as needed
+      }}
       yScale={{
         type: 'linear',
         min: 'auto',
@@ -115,18 +104,17 @@ export default function SimpleLineChart({ followerData, posts, chartType }) {
         stacked: true,
         reverse: false,
       }}
-      yFormat=' >-.2f'
       axisTop={null}
       axisRight={null}
       axisBottom={{
-        tickSize: 5,
+        format: '%b %d', // Format tick values (e.g., 'Aug 05 11:00')
+        tickValues: tickValues, // Customize tick interval
+        tickSize: 10,
         tickPadding: 5,
         tickRotation: 0,
         legend: 'Date',
         legendOffset: 36,
         legendPosition: 'middle',
-        truncateTickAt: 0,
-        tickValues: tickValues,
       }}
       axisLeft={{
         tickSize: 5,
@@ -135,15 +123,14 @@ export default function SimpleLineChart({ followerData, posts, chartType }) {
         legend: yAxisLegend,
         legendOffset: -80,
         legendPosition: 'middle',
-        truncateTickAt: 5,
       }}
-      pointSize={5}
+      pointSize={7}
       pointColor={{ theme: 'background' }}
       pointBorderWidth={2}
       pointBorderColor={{ from: 'serieColor' }}
       pointLabel='data.yFormatted'
       pointLabelYOffset={-12}
-      enableTouchCrosshair={true}
+      enableCrosshair={true}
       useMesh={true}
       legends={[
         {

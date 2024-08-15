@@ -152,17 +152,17 @@ export const createSentimentDataStructure = (posts) => {
     const commentsCount = positive + negative + neutral;
 
     positiveSentiment.data.push({
-      x: igTimestamp,
+      x: new Date(igTimestamp), // Convert to Date object
       y: (positive / commentsCount) * 100,
     });
 
     neutralSentiment.data.push({
-      x: igTimestamp,
+      x: new Date(igTimestamp), // Convert to Date object
       y: (neutral / commentsCount) * 100,
     });
 
     negativeSentiment.data.push({
-      x: igTimestamp,
+      x: new Date(igTimestamp), // Convert to Date object
       y: (negative / commentsCount) * 100,
     });
   });
