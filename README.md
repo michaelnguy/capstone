@@ -8,7 +8,25 @@ This repo consists of 5 separate directories: a React web client, a Node.js back
 
 ## Getting Started
 
-<br />
+### Data Sources
+
+1. The hashtag_rec portion of the project requires the HARRISON dataset from Park et al. A Google drive link to the dataset can be found [here](https://drive.google.com/file/d/1m3u0vVw-DzaVsQNvyW_PtbMKZjzEAsC2/view?usp=sharing)(link only available to University of Michigan accounts).
+
+2. Unzip the folder and copy its contents to the preexisting empty HARRISON folder.
+
+3. Download data_embeddings.txt and data_indices_split.json from their drive links (links only available to University of Michigan accounts).
+   [link 1](https://drive.google.com/file/d/1c18eQKmcgY3HwACJOYC52G0lAPFpp_jf/view?usp=drive_link)
+   [link 2](https://drive.google.com/file/d/1wfr-n5yh-dQSHu_N67psG7QDEIlvLJP6/view?usp=drive_link)
+
+4. The final HARRISON folder should consist of:
+
+```
+    instagram_dataset/
+    data_embeddings.txt
+    data_indices_split.json
+    data_list.txt
+    tag_list.txt
+```
 
 ### Requirements
 
@@ -74,3 +92,14 @@ flask –app app.py run
 cd hashtag_rec
 pip install -r /scripts/requirements.txt
 ```
+
+#### Sentiment Model
+
+```sh
+cd sentiment_model
+pip install -r requirements.txt
+```
+
+## Data Sources
+
+Park et al., "HARRISON: A Benchmark on HAshtag Recommendation for Real-world Images in Social Networks," ArXiv, 2016
