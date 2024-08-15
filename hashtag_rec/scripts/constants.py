@@ -1,5 +1,5 @@
 # data constants
-DATA_DIR = "/content/drive/MyDrive/24Su/PRIV_Capstone/HARRISON"
+DATA_DIR = "./data" # REPLACE THIS with the directory path that you stored the HARRISON dataset in
 DATA_LEN = 57383
 
 # file path constants

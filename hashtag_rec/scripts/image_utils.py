@@ -22,6 +22,9 @@ def get_image_from_fp(img_fp):
     return img
 
 def get_vit_embeddings(images, image_processor, model):
+    """
+    Get image embeddings from a ViT model
+    """
     inputs = image_processor(images, return_tensors="pt")
 
     with torch.no_grad():
@@ -32,14 +35,22 @@ def get_vit_embeddings(images, image_processor, model):
     return embeddings
 
 def get_clip_image_embedding(image, processor, model):
+    """
+    Get image embeddings from a CLIP model
+    """
     image = processor(text=None, images=image, return_tensors="pt")["pixel_values"]
-    embedding = model.get_image_features(image)
-    return embedding.cpu().detach()
+    with torch.no_grad():
+        embedding = model.get_image_features(image)
+    return embedding
 
 def get_clip_text_embedding(text, processor, model):
+    """
+    Get text embeddings from a CLIP model
+    """
     inputs = processor(text=text, images=None, return_tensors="pt")
-    embedding = model.get_text_features(**inputs)
-    return embedding.cpu().detach()
+    with torch.no_grad():
+        embedding = model.get_text_features(**inputs)
+    return embedding
 
 def get_image_vectorizer_for_recommender(model_name="clip"):
     """
