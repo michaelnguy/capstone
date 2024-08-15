@@ -3,8 +3,11 @@ import React, { useContext, useState } from 'react';
 import { Row, Col, Form, Button, Container } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useForm } from '../util/hooks';
+import { ReactComponent as Loader } from '../assets/loader.svg';
+
 import { AuthContext } from '../context/auth';
+
+const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 export default function Login(props) {
   const context = useContext(AuthContext);
@@ -13,12 +16,12 @@ export default function Login(props) {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const uploadFields = (e) => {
     e.preventDefault();
-    console.log('hello');
-
-    fetch('/signin', {
+    setLoading(true);
+    fetch(`${ENDPOINT}/signin`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -32,7 +35,9 @@ export default function Login(props) {
           console.log('error with login');
           console.log(data.error);
           setErrors({ error: data.error });
+          setLoading(false);
         } else {
+          setLoading(false);
           console.log('login successful');
           context.login(data);
           navigate('/app/');
@@ -73,9 +78,17 @@ export default function Login(props) {
             </Form.Group>
 
             <div className='text-center mt-4'>
-              <Button variant='success' type='submit'>
-                Login
+              <Button
+                style={{ width: '80px' }}
+                variant='success'
+                type='submit'
+                disabled={loading}
+              >
+                {!loading ? 'Submit' : <Loader className='spinner' />}
               </Button>
+              {loading && (
+                <div className='mt-1'>Sign in may take up to a minute</div>
+              )}
               <br />
               <small>
                 Don't have an account? <Link to='/register'>Register</Link>

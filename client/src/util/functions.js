@@ -51,7 +51,7 @@ export const calcCommentsPerPost = (_list) => {
 
 export const calcLikesPerPost = (_list) => {
   const likes = _list.reduce((acc, item) => acc + item.likes, 0);
-  console.log(likes);
+
   const likesPerPost = Math.round(likes / _list.length);
 
   return likesPerPost;

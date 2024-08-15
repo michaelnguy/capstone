@@ -16,13 +16,16 @@ import {
   calcCommentsPerPost,
   calcEngagementForList,
   calcLikesPerPost,
+  formatDate,
 } from '../util/functions';
 import SimpleLineChart from './LineChart';
+
+const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 export default function Overview() {
   const [posts, setPosts] = useState([]);
   const [chartType, setChartType] = useState('Followers');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const getDictValue = (_dict, _pos) => {
@@ -38,11 +41,12 @@ export default function Overview() {
   };
 
   useEffect(() => {
+    setLoading(true);
     const fetchPosts = async () => {
       const token = localStorage.getItem('jwtToken');
 
       try {
-        const response = await axios.get('http://localhost:3001/posts', {
+        const response = await axios.get(`${ENDPOINT}/posts`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -61,10 +65,22 @@ export default function Overview() {
     fetchPosts();
   }, []);
 
-  return (
+  return loading ? (
+    <Container
+      style={{ minHeight: '45vh', marginTop: '10rem' }}
+      className='d-flex justify-content-center align-items-center'
+    >
+      <div className='lds-dual-ring-singlepiece'></div>
+    </Container>
+  ) : (
     <Container className='dashboard-body-container'>
-      <Row>
-        <h2 className='dashboard-heading'>Dashboard</h2>
+      <Row className=''>
+        <div className='d-flex justify-content-between align-items-center'>
+          <h2 className='dashboard-heading'>Dashboard</h2>
+          <div className='card-wrapper overview-card-title'>
+            Last updated: {posts.length > 0 && formatDate(posts[0].igTimestamp)}
+          </div>
+        </div>
       </Row>
       <Row>
         <Col xs={3}>

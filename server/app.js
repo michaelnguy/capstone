@@ -5,12 +5,14 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 
+const PORT = process.env.PORT || 3001;
+
 const MONGO_DB_PW = process.env.MONGODB_ATLAS_PW;
 
 const uri = `mongodb+srv://mqnguy:${MONGO_DB_PW}@capstone.qhenjcs.mongodb.net/?appName=capstone`;
 
 mongoose.connection.on('connected', () =>
-  console.log('connected to MongoDB Atlas')
+  console.log('Connected to MongoDB Atlas')
 );
 
 mongoose.connect(uri);
@@ -25,6 +27,6 @@ app.use(require('./routes/auth'));
 app.use(require('./routes/post'));
 app.use(require('./routes/user'));
 
-app.listen(3001, () => {
-  console.log('Server is running on port 3001');
+app.listen(PORT, () => {
+  console.log('Server is running');
 });

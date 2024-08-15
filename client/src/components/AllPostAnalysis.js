@@ -11,20 +11,24 @@ import {
   calculateSentimentPercentages,
 } from '../util/functions.js';
 
+const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
 export default function AllPostAnalysis({ userData }) {
-  const { state, dispatch } = useContext(AuthContext);
+  const { user, state, dispatch } = useContext(AuthContext);
+  // console.log(user);
 
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [percentages, setPercentages] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     const fetchPosts = async () => {
       const token = localStorage.getItem('jwtToken');
 
       try {
-        const response = await axios.get('http://localhost:3001/posts', {
+        const response = await axios.get(`${ENDPOINT}/posts`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -47,7 +51,14 @@ export default function AllPostAnalysis({ userData }) {
     fetchPosts();
   }, []);
 
-  return (
+  return loading ? (
+    <Container
+      style={{ minHeight: '45vh', marginTop: '10rem' }}
+      className='d-flex justify-content-center align-items-center'
+    >
+      <div className='lds-dual-ring-singlepiece'></div>
+    </Container>
+  ) : (
     <Container className='posts-body-container'>
       <Row className=''>
         <div className='d-flex justify-content-between align-items-center'>
@@ -55,7 +66,9 @@ export default function AllPostAnalysis({ userData }) {
             Latest Posts -{' '}
             <span style={{ fontWeight: '300' }}>(Click Post for Details)</span>
           </h2>
-          <div className='card-wrapper overview-card-title'>Last updated:</div>
+          <div className='card-wrapper overview-card-title'>
+            Last updated: {posts.length > 0 && formatDate(posts[0].igTimestamp)}
+          </div>
         </div>
       </Row>
       <div className='posts-table-outercontainer'>

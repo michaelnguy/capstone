@@ -1,7 +1,7 @@
 {
   "name": "capstone-client",
   "version": "0.1.0",
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:3001/",
   "private": true,
   "dependencies": {
     "@nivo/bar": "^0.87.0",

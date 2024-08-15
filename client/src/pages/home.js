@@ -30,10 +30,7 @@ export default function Home() {
 
   return (
     <>
-      <Container
-        style={{ backgroundColor: '#f3f2ff' }}
-        className='home-container'
-      >
+      <Container className='home-container'>
         <Row className='home-top'>
           <Col className='d-flex justify-content-between' xs={12}>
             <div>

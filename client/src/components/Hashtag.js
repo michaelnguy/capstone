@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import { Col, Row, Container, Form, Button, Image } from 'react-bootstrap';
+import { ReactComponent as Loader } from '../assets/loader.svg';
+
 const HF_TOKEN = process.env.REACT_APP_HF_TOKEN;
 
 export default function Hashtag() {
@@ -10,7 +12,6 @@ export default function Hashtag() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
-  const [response, setResponse] = useState(null);
 
   // const handleSubmit = async (event) => {
   //   event.preventDefault();
@@ -42,9 +43,13 @@ export default function Hashtag() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
+    setError(null);
 
     if (!file) {
       console.error('No file selected');
+      setError('No file selected');
+      setLoading(false);
       return;
     }
 
@@ -62,13 +67,14 @@ export default function Hashtag() {
         }
       );
 
-      setResponse(response.data); // Save the response data to state
+      setHashtags(response.data); // Save the response data to state
+      setLoading(false);
       console.log(JSON.stringify(response.data));
     } catch (error) {
-      console.error(
-        'Error querying the model:',
-        error.response ? error.response.data : error.message
-      );
+      console.error('Error querying the model:', error.response.data.error);
+      setLoading(false);
+      setHashtags(null);
+      setError(error.response.data.error);
     }
   };
 
@@ -85,32 +91,20 @@ export default function Hashtag() {
             <Col xs={12}>
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId='formFile' className='mb-3'>
-                  <Form.Label>Default file input example</Form.Label>
+                  <Form.Label>Select a .jpeg or .png</Form.Label>
                   <Form.Control type='file' onChange={handleFileChange} />
                 </Form.Group>
-                <Button variant='primary' type='submit'>
-                  {loading ? 'loading...' : 'Submit'}
+                <Button
+                  style={{ width: '80px' }}
+                  variant='primary'
+                  type='submit'
+                  disabled={loading}
+                >
+                  {!loading ? 'Submit' : <Loader className='spinner' />}
                 </Button>
               </Form>
-
-              <Form onSubmit={handleSubmit}>
-                <Form.Group className='mb-3' controlId='formUrl'>
-                  <Form.Label>Image url</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder='Enter a URL'
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
-                  />
-                  <Form.Text className='text-muted'>
-                    Enter a url of an image and we'll determine hashtags for
-                    you.
-                  </Form.Text>
-                </Form.Group>
-                <Button variant='primary' type='submit'>
-                  {loading ? 'loading...' : 'Submit'}
-                </Button>
-              </Form>
+              {/* Display error message if there's an error */}
+              {error && <p className='text-danger mt-2'>{error}</p>}
             </Col>
           </Row>
           <Row>
@@ -122,16 +116,11 @@ export default function Hashtag() {
                   <h5>Recommended Hashtags:</h5>
                   <ul>
                     {hashtags.map((hashtag, index) => (
-                      <li key={index}>#{hashtag}</li>
+                      <li key={index}>#{hashtag.label}</li>
                     ))}
                   </ul>
                 </div>
               )}
-              {/* Display error message if there's an error */}
-              {error && <p className='text-danger'>{error}</p>}
-            </Col>
-            <Col xs={7}>
-              <Image src={imageUrl} fluid />
             </Col>
           </Row>
         </div>

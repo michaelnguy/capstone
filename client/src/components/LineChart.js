@@ -18,6 +18,15 @@ export default function SimpleLineChart({ followerData, posts, chartType }) {
       ? 'Likes Per Post'
       : '';
 
+  const chartColors = {
+    Followers: '#9b51e0', // Blue
+    Engagement: '#365cf5', // Green
+    Comments: '#f2994a', // Red
+    Likes: '#219653', // Orange
+  };
+
+  const selectedColor = chartColors[chartType] || '#000';
+
   if (chartType === 'Followers') {
     chartData = [
       {
@@ -96,6 +105,7 @@ export default function SimpleLineChart({ followerData, posts, chartType }) {
   const MyResponsiveLine = () => (
     <ResponsiveLine
       data={chartData}
+      colors={selectedColor}
       margin={{ top: 50, right: 110, bottom: 50, left: 75 }}
       xScale={{ type: 'point' }}
       yScale={{

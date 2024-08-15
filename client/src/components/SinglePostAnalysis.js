@@ -13,6 +13,8 @@ import { InstagramEmbed } from 'react-social-media-embed';
 
 import { formatDate, calcEngagement } from '../util/functions.js';
 
+const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
 export default function SinglePostAnalysis({ userData }) {
   const { postId } = useParams();
 
@@ -53,7 +55,7 @@ export default function SinglePostAnalysis({ userData }) {
       const token = localStorage.getItem('jwtToken');
 
       try {
-        const response = await axios.get('http://localhost:3001/getpost', {
+        const response = await axios.get(`${ENDPOINT}/getpost`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',

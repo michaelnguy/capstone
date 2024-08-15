@@ -15,6 +15,7 @@ import Home from './pages/home';
 import Register from './pages/register';
 import Login from './pages/login';
 import Dashboard from './pages/dashboard';
+import Privacy from './pages/privacy';
 
 import './stylesheets/App.css';
 
@@ -25,6 +26,7 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/privacy' element={<Privacy />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/app/*' element={<GuardRoute />}>

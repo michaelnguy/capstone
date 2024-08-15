@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
 const User = mongoose.model('User');
@@ -22,7 +21,6 @@ function generateToken(user) {
 }
 
 router.post('/signup', (req, res) => {
-  console.log(req.body);
   const { name, email, password } = req.body;
   if (!email || !password || !name) {
     return res.status(422).json({ error: 'please fill in all fields' });

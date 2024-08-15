@@ -23,28 +23,30 @@ import {
   formatDate,
 } from '../util/functions';
 
+const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
 export default function SentimentOverview({ userData }) {
   const [posts, setPosts] = useState([]);
   const [datePosts, setDatePosts] = useState([]);
   const [taggedPosts, setTaggedPosts] = useState([]);
   const [time, setTime] = useState('All Time');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedTag, setSelectedTag] = useState('All Tags');
 
   useEffect(() => {
+    setLoading(true);
     const fetchPosts = async () => {
       const token = localStorage.getItem('jwtToken');
 
       try {
-        const response = await axios.get('http://localhost:3001/posts', {
+        const response = await axios.get(`${ENDPOINT}/posts`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         const fetchedPosts = response.data;
         setPosts(fetchedPosts);
-        console.log(fetchedPosts);
 
         setLoading(false);
       } catch (error) {
@@ -139,7 +141,14 @@ export default function SentimentOverview({ userData }) {
   const negVsAvg = negPercentage - negPercAll;
   const neuVsAvg = neuPercentage - neuPercAll;
 
-  return (
+  return loading ? (
+    <Container
+      style={{ minHeight: '45vh', marginTop: '10rem' }}
+      className='d-flex justify-content-center align-items-center'
+    >
+      <div className='lds-dual-ring-singlepiece'></div>
+    </Container>
+  ) : (
     <Container className='sentiment-body-container'>
       <Row className=''>
         <div className='d-flex justify-content-between align-items-center'>

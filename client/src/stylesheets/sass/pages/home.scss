@@ -3,7 +3,7 @@ body {
 }
 
 .home-container {
-  background-color: #f3f2ff;
+  background-color: #f1f5f9;
 }
 
 .home-top {
@@ -121,7 +121,7 @@ body {
     linear,
     left top,
     left bottom,
-    from(#f3f2ff),
+    from(#f1f5f9),
     to(#fff)
   );
   align-items: center;
@@ -248,7 +248,7 @@ body {
 
 .faq-outer-wrapper {
   padding-bottom: 10rem;
-  background-image: linear-gradient(180deg, #fff, #f3f2ff);
+  background-image: linear-gradient(180deg, #fff, #f1f5f9);
 }
 
 .accordion-button {
@@ -349,7 +349,7 @@ body {
 }
 
 .container-outerwrapper-bottom {
-  background-image: linear-gradient(180deg, #f3f2ff, #fff);
+  background-image: linear-gradient(180deg, #f1f5f9, #fff);
 }
 
 .accordion {

@@ -10,7 +10,7 @@ const dummyPosts = require('../util/dummyPosts');
 
 router.post('/create_dummy_data', requireLogin, async (req, res) => {
   try {
-    await Post.deleteMany({ owner: req.user._id });
+    // await Post.deleteMany({ owner: req.user._id });
 
     for (let i = 0; i < dummyPosts.length; i++) {
       let {

@@ -3,6 +3,8 @@ import React, { useContext, useState } from 'react';
 import { Row, Col, Form, Button, Container } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
+const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
 export default function Register(props) {
   const navigate = useNavigate();
   const [name, setName] = useState('');
@@ -26,7 +28,7 @@ export default function Register(props) {
       setErrors({ password: "Passwords don't match" });
       return;
     }
-    fetch('/signup', {
+    fetch(`${ENDPOINT}/signup`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -52,17 +54,19 @@ export default function Register(props) {
       <Row className='mt-5 justify-content-center align-items-center'>
         <div className='auth-wrapper'>
           <h1 className='text-center'>Register</h1>
-          <Form onSubmit={uploadFields}>
+          <Form>
             <Form.Group>
               <Form.Label className={errors.name && 'text-danger'}>
                 {errors.name ?? 'Name'}
               </Form.Label>
               <Form.Control
+                placeholder='Registering is disabled for this demo'
                 name='name'
                 type='text'
                 value={name}
                 className={errors.name && 'is-invalid'}
                 onChange={(e) => setName(e.target.value)}
+                disabled
               />
             </Form.Group>
             <Form.Group>
@@ -70,11 +74,13 @@ export default function Register(props) {
                 {errors.email ?? 'Email'}
               </Form.Label>
               <Form.Control
+                placeholder='Registering is disabled for this demo'
                 name='email'
                 type='text'
                 value={email}
                 className={errors.email && 'is-invalid'}
                 onChange={(e) => setEmail(e.target.value)}
+                disabled
               />
             </Form.Group>
             <Form.Group>
@@ -82,11 +88,13 @@ export default function Register(props) {
                 {errors.password ?? 'Password'}
               </Form.Label>
               <Form.Control
+                placeholder='Registering is disabled for this demo'
                 name='password'
                 type='password'
                 value={password}
                 className={errors.password && 'is-invalid'}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled
               />
             </Form.Group>
             <Form.Group>
@@ -94,16 +102,18 @@ export default function Register(props) {
                 {errors.password ?? 'Confirm Password'}
               </Form.Label>
               <Form.Control
+                placeholder='Registering is disabled for this demo'
                 name='confirmPassword'
                 type='password'
                 value={confirmPassword}
                 className={errors.password && 'is-invalid'}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                disabled
               />
             </Form.Group>
 
             <div className='text-center mt-4'>
-              <Button variant='success' type='submit'>
+              <Button variant='success' type='submit' disabled>
                 Register
               </Button>
               <br />
