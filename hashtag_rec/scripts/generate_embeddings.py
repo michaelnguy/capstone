@@ -4,10 +4,10 @@ from image_utils import get_image_from_fp
 import torch
 from transformers import AutoImageProcessor, ViTModel
 
-from constants import DATA_DIR, DATA_LEN, EMB_COL, ID_COL, IMG_MODEL_NAME
+from constants import DATA_DIR, DATA_LEN, EMB_COL, ID_COL, VIT_MODEL_NAME
 
-image_processor = AutoImageProcessor.from_pretrained(IMG_MODEL_NAME)
-model = ViTModel.from_pretrained(IMG_MODEL_NAME)
+image_processor = AutoImageProcessor.from_pretrained(VIT_MODEL_NAME)
+model = ViTModel.from_pretrained(VIT_MODEL_NAME)
 
 def get_embeddings_from_model(images, image_processor, model):
     inputs = image_processor(images, return_tensors="pt")

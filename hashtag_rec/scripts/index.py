@@ -2,7 +2,7 @@ from constants import EMB_COL, ID_COL
 import numpy as np
 import faiss
 
-def create_index_from_df(df, idx_mapping=None):
+def create_index_from_df(df, metric="cos", id_col=ID_COL, emb_col=EMB_COL, idx_mapping=None):
     """
     Create a Faiss index that uses cosine similarity. Vectors from a given pandas dataframe are added to the index
 
@@ -12,9 +12,9 @@ def create_index_from_df(df, idx_mapping=None):
     :return: 2-len tuple of (Faiss index, idx_mapping)
     """
     if idx_mapping is None:
-        idx_mapping = {idx:img_id for idx,img_id in enumerate(df[ID_COL])}
+        idx_mapping = {idx:img_id for idx,img_id in enumerate(df[id_col])}
 
-    vectors = np.array(df[EMB_COL].to_list())
+    vectors = np.array(df[emb_col].to_list())
     # need vectors as type float32 in order to use faiss.normalize_L2
     # ref: https://stackoverflow.com/a/76037727
     vectors = vectors.astype(np.float32)
@@ -24,7 +24,10 @@ def create_index_from_df(df, idx_mapping=None):
     print("Creating index with vectors of shape:", vectors.shape)
 
     d = vectors.shape[1]  # dimension of vectors
-    index = faiss.IndexFlatIP(d)
+    if metric.lower() == "l2":
+        index = faiss.IndexFlatL2(d)
+    else:
+        index = faiss.IndexFlatIP(d)
     # Add vectors to the index
     index.add(vectors)
 
