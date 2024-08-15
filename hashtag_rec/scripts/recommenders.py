@@ -14,6 +14,16 @@ class WeightType(Enum):
     CLIP = "clip_score"
 
 def get_clip_score_for_tags(tag_list, image, clip_processor, clip_model):
+    """
+    Get CLIP score for a list of tags compared to a single image
+
+    :param tag_list: list of tags to compute scores for
+    :param image: the image to compare each tag in tag_list to
+    :param clip_processor: CLIP processor
+    :param clip_model: CLIP model
+
+    :return: dict where each entry is tag : clip score
+    """
     inputs = clip_processor(text=tag_list, images=image, return_tensors="pt", padding=True)
     outputs = clip_model(**inputs)
 
@@ -32,7 +42,9 @@ class IndexTagRecommender:
 
         :param index: Faiss index to be used for finding similar images
         :param idx_mapping: mapping for vector id in the Faiss index to entity id/metadata
-        :param img_tag_list: list of lists of ground truth tags for the images in the Faiss index. Assumes that img_tag_list[i] is the list of ground truth tags for image i
+        :param img_tag_list: list of ground truth tags for the images in the Faiss index. 
+                             For ImageIndexTagRecommender, assumes that img_tag_list[i] is the list of ground truth tags for image i
+                             For TagIndexTagRecommender, assumes that img_tag_list[i] is the tag text/string for tag i
         :param num_rec_tags: the number of desired tags to be recommended for a given image
         :param weight_method: how to weight the results from faiss search for recommendation
         """
@@ -87,6 +99,9 @@ class IndexTagRecommender:
         raise NotImplementedError
     
 class ImageIndexTagRecommender(IndexTagRecommender):
+    """
+    Class to perform tag recommendation by querying image embedding against image embeddings
+    """
 
     SUPPORTED_WEIGHT_METHODS = {WeightType.FREQUENCY, WeightType.FAISS, WeightType.CLIP}
 
@@ -146,6 +161,9 @@ class ImageIndexTagRecommender(IndexTagRecommender):
         return rec_tags_list
 
 class TagIndexTagRecommender(IndexTagRecommender):
+    """
+    Class to perform tag recommendation by querying image embedding against tag embeddings
+    """
 
     SUPPORTED_WEIGHT_METHODS = {WeightType.FAISS, WeightType.CLIP}
 
@@ -223,7 +241,7 @@ class LlavaTagRecommender:
         
         if self.use_clip_scores:
             tags_w_scores = get_clip_score_for_tags(generated_tags, img, self.clip_processor, self.clip_model)
-            generated_tags = dict(sorted(tags_w_scores.items(), key=lambda t:t[1], reverse=True))
+            generated_tags = list(dict(sorted(tags_w_scores.items(), key=lambda t:t[1], reverse=True)).keys())
         
         rec_tags = generated_tags[:num_tags]
         return rec_tags
