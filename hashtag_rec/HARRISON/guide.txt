@@ -1,0 +1,15 @@
+1. Download and unzip the Harrison dataset (links only available to University of Michigan accounts).
+https://drive.google.com/file/d/1m3u0vVw-DzaVsQNvyW_PtbMKZjzEAsC2/view?usp=sharing
+
+2. Copy the contents of the unzipped HARRISON folder to this directory.
+
+3. Download data_embeddings.txt and data_indices_split.json from their drive links (links only available to University of Michigan accounts).
+https://drive.google.com/file/d/1c18eQKmcgY3HwACJOYC52G0lAPFpp_jf/view?usp=drive_link
+https://drive.google.com/file/d/1wfr-n5yh-dQSHu_N67psG7QDEIlvLJP6/view?usp=drive_link
+
+4. The final HARRISON folder should consist of:
+    instagram_dataset/
+    data_embeddings.txt
+    data_indices_split.json
+    data_list.txt
+    tag_list.txt
