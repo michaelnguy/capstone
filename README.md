@@ -110,6 +110,7 @@ img_vectorizer = get_image_vectorizer_for_recommender()
 ````
 
 Step 2: Get image
+
 ![](https://live.staticflickr.com/7707/16525630273_09bd1f9bf3_n.jpg)
 
 ````
@@ -125,7 +126,7 @@ recommender.get_tags_for_image(img, img_vectorizer)
 [['sunset', 'sea', 'beach', 'landscape', 'nature']]
 ````
 
-See the notebook `hashtag_recommender.ipynb` in `hashtag_rec` directory for example calls to generate hashtag recommendations.
+See the notebook `hashtag_recommender.ipynb` in `hashtag_rec` directory for more methods to generate hashtag recommendations.
 
 #### Sentiment Model
 
