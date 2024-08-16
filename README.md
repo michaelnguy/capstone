@@ -96,8 +96,36 @@ flask –app app.py run
 
 ```sh
 cd hashtag_rec
-pip install -r /scripts/requirements.txt
+pip install -r ./scripts/requirements.txt
 ```
+
+**Getting recommended tags**
+
+Step 1: Set up recommender
+````
+from recommenders import ImageIndexTagRecommender
+
+recommender = ImageIndexTagRecommender(img_index, train_idx_mapping, tags_list)
+img_vectorizer = get_image_vectorizer_for_recommender()
+````
+
+Step 2: Get image
+![](https://live.staticflickr.com/7707/16525630273_09bd1f9bf3_n.jpg)
+
+````
+from image_utils import get_image_from_url
+img = get_image_from_url(img_url)
+````
+
+Step 3: Call recommender
+````
+recommender.get_tags_for_image(img, img_vectorizer)
+
+# by default, recommend 5 tags per image
+[['sunset', 'sea', 'beach', 'landscape', 'nature']]
+````
+
+See the notebook `hashtag_recommender.ipynb` in `hashtag_rec` directory for example calls to generate hashtag recommendations.
 
 #### Sentiment Model
 
