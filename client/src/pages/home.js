@@ -4,6 +4,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import { TypeAnimation } from 'react-type-animation';
 import Lottie from 'react-lottie';
 import animationData from '../lotties/hero.json';
+import { Link } from 'react-router-dom';
 
 import logo from '../images/logo.png';
 import name from '../images/name.png';
@@ -44,7 +45,7 @@ export default function Home() {
           </Col>
         </Row>
         <Row className='hero-row'>
-          <Col className='hero-heading-col' xs={6}>
+          <Col className='hero-heading-col' xs={{ span: 12, order: 2 }} md={6}>
             <h1 className='hero-heading'>
               Leveraging AI Machine Learning to{' '}
               <span className='hero-text-blue'>make the most</span> of your
@@ -59,7 +60,11 @@ export default function Home() {
               Open VibeMetrics
             </a>
           </Col>
-          <Col className='d-flex justify-content-center pt-5' xs={6}>
+          <Col
+            className='d-flex justify-content-center pt-5'
+            xs={{ span: 12, order: 1 }}
+            md={6}
+          >
             <div>
               <Lottie options={defaultOptions} height={475} width={475} />
             </div>
@@ -105,8 +110,7 @@ export default function Home() {
                 Track vital stats about your account
               </h3>
               <p className='feature-card-text'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore.
+                View trends over time and pinpoint your best received posts
               </p>
               <div className='d-flex flex-column list'>
                 <div className='list-wrapper d-flex'>
@@ -180,8 +184,6 @@ export default function Home() {
                   We're building with some of the latest tools and techniques in
                   data science
                 </h3>
-
-                <a className='button-whitepaper'>Read our whitepaper</a>
               </div>
             </Col>
             <Col className='logo-col' xs={8}>
@@ -215,14 +217,9 @@ export default function Home() {
                       What does VibeMetrics do with my data?
                     </Accordion.Header>
                     <Accordion.Body>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
+                      Please visit our data{' '}
+                      <Link to='/privacy'>privacy page</Link> page for more
+                      information about how we use your data.
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey='1'>
@@ -230,14 +227,8 @@ export default function Home() {
                       How do I get access to VibeMetrics?
                     </Accordion.Header>
                     <Accordion.Body>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
+                      VibeMetrics is currently in demo mode and is not publicly
+                      available.
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey='2'>
@@ -245,44 +236,8 @@ export default function Home() {
                       Who are the creators of VibeMetrics?
                     </Accordion.Header>
                     <Accordion.Body>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </Accordion.Body>
-                  </Accordion.Item>
-                  <Accordion.Item eventKey='3'>
-                    <Accordion.Header className='faq-header'>
-                      Heading 4
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </Accordion.Body>
-                  </Accordion.Item>
-                  <Accordion.Item eventKey='4'>
-                    <Accordion.Header className='faq-header'>
-                      Heading 5
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
+                      VibeMetrics was created by Team 24 for our MADS capstone
+                      project.
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
@@ -299,12 +254,15 @@ export default function Home() {
               Get started with VibeMetrics
             </h2>
           </Row>
-          <a
-            href='/'
-            className='primary-button align-self-center justify-self-center'
+          <Button
+            href='/app'
+            className='align-self-center'
+            style={{ maxWidth: '160px', borderRadius: '2.5rem' }}
           >
+            {' '}
             Open VibeMetrics
-          </a>
+          </Button>
+
           <Row></Row>
         </Container>
       </Container>
@@ -320,13 +278,15 @@ export default function Home() {
             </Col>
             <Col className='d-flex flex-column' xs={3}>
               <p className='footer-title'>Website</p>
-              <a className='footer-bottom-link'>Login</a>
-              <a className='footer-bottom-link'>Whitepaper</a>
+              <Link className='footer-bottom-link' to='/app'>
+                Log in
+              </Link>
             </Col>
             <Col className='d-flex flex-column' xs={3}>
               <p className='footer-title'>Legal</p>
-              <a className='footer-bottom-link'>Terms of Service</a>
-              <a className='footer-bottom-link'>Data Privacy</a>
+              <Link className='footer-bottom-link' to='/privacy'>
+                Data Privacy
+              </Link>
             </Col>
           </Row>
           <Row className='footer-copyright'>

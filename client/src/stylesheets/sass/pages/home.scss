@@ -26,6 +26,9 @@ body {
 
 .hero-heading-col {
   padding: 150px 40px 0 0;
+  @media only screen and (max-width: 768.9px) {
+    padding-top: 1rem;
+  }
 }
 
 .hero-heading {
@@ -346,6 +349,10 @@ body {
 
 .typing-animation-wrapper {
   padding-right: 12rem;
+
+  @media only screen and (max-width: 768.9px) {
+    padding-top: 18rem;
+  }
 }
 
 .container-outerwrapper-bottom {

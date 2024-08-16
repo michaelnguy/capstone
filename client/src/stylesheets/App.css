@@ -9428,11 +9428,11 @@ h3, .h3 {
 
 .sidebar-item:focus {
   color: #0a58ca;
-  background-color: #fff; }
+  background-color: transparent; }
 
 .sidebar-item:hover {
   color: #0a58ca;
-  background-color: #fff; }
+  background-color: transparent; }
 
 .sidebar-icon-container {
   width: 24px;
@@ -9475,6 +9475,9 @@ body {
 
 .hero-heading-col {
   padding: 150px 40px 0 0; }
+  @media only screen and (max-width: 768.9px) {
+    .hero-heading-col {
+      padding-top: 1rem; } }
 
 .hero-heading {
   font-family: 'Rany';
@@ -9730,6 +9733,9 @@ body {
 
 .typing-animation-wrapper {
   padding-right: 12rem; }
+  @media only screen and (max-width: 768.9px) {
+    .typing-animation-wrapper {
+      padding-top: 18rem; } }
 
 .container-outerwrapper-bottom {
   background-image: linear-gradient(180deg, #f1f5f9, #fff); }
@@ -9756,7 +9762,11 @@ body {
 .card-box {
   box-shadow: 0px 12px 24px -4px rgba(145, 158, 171, 0.12), 0px 0px 2px 0px rgba(145, 158, 171, 0.2);
   border-radius: 7px;
-  border: none; }
+  border: none;
+  margin: 0.75rem; }
+  @media only screen and (max-width: 991.9px) {
+    .card-box {
+      margin: 0.5rem; } }
 
 .icon-container {
   margin-right: 20px;
@@ -9844,13 +9854,16 @@ body {
   border-radius: 0.5rem; }
 
 .overview-outer-wrapper {
-  padding: 0 0.75rem; }
+  padding: 0 0.75rem 3rem 0.75rem; }
 
 .overview-inner-wrapper {
   background-color: white;
   border-radius: 0.375rem;
   padding: 3rem;
   box-shadow: 0px 12px 24px -4px rgba(145, 158, 171, 0.12), 0px 0px 2px 0px rgba(145, 158, 171, 0.2); }
+  @media only screen and (max-width: 991.9px) {
+    .overview-inner-wrapper {
+      padding: 0; } }
 
 .auth-wrapper {
   background-color: white;
@@ -9864,11 +9877,17 @@ body {
 
 .posts-table-outercontainer {
   padding: 0 2.5rem; }
+  @media only screen and (max-width: 991.9px) {
+    .posts-table-outercontainer {
+      padding: 0; } }
 
 .posts-table-innercontainer {
   background-color: white;
   padding: 1rem;
   border-radius: 7px; }
+  @media only screen and (max-width: 991.9px) {
+    .posts-table-innercontainer {
+      padding: 0.2rem; } }
 
 .table-row-label {
   margin-bottom: 1.5rem; }
@@ -9878,6 +9897,9 @@ body {
   font-weight: 500;
   color: #1a2142;
   text-align: center; }
+  @media only screen and (max-width: 991.9px) {
+    .table-label {
+      font-size: 0.7rem; } }
 
 .table-row-post {
   color: #5d657b;
@@ -9889,12 +9911,21 @@ body {
   padding: 0.5rem 0;
   align-items: center;
   text-decoration: none; }
+  @media only screen and (max-width: 991.9px) {
+    .table-row-post {
+      font-size: 0.7rem; } }
 
 /*    ////////////////////////////////////////    */
 /*    Start Sentiment Overview Styling Section    */
 /*    ////////////////////////////////////////    */
 .overview-card-box {
-  margin-bottom: 1rem; }
+  box-shadow: 0px 12px 24px -4px rgba(145, 158, 171, 0.12), 0px 0px 2px 0px rgba(145, 158, 171, 0.2);
+  border-radius: 7px;
+  border: 1px;
+  margin: 0.75rem; }
+  @media only screen and (max-width: 991.9px) {
+    .overview-card-box {
+      margin: 0.5rem; } }
 
 .overview-card-title {
   font-size: 1rem;

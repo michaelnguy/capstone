@@ -201,7 +201,7 @@ export default function SentimentOverview({ userData }) {
             </Col>
           </Row>
           <Row>
-            <Col xs={3}>
+            <Col xs={6} lg={3}>
               <Card className='overview-card-box'>
                 <div className='d-flex card-wrapper align-items-center'>
                   <div className='icon-container icon-container-purple d-flex align-items-center justify-content-center'>
@@ -218,7 +218,7 @@ export default function SentimentOverview({ userData }) {
               </Card>
             </Col>
 
-            <Col xs={3}>
+            <Col xs={6} lg={3}>
               <Card className='overview-card-box'>
                 <div className='d-flex card-wrapper align-items-center'>
                   <div className='icon-container icon-container-green d-flex align-items-center justify-content-center'>
@@ -240,7 +240,7 @@ export default function SentimentOverview({ userData }) {
                 </div>
               </Card>
             </Col>
-            <Col xs={3}>
+            <Col xs={6} lg={3}>
               <Card className='overview-card-box'>
                 <div className='d-flex card-wrapper align-items-center'>
                   <div className='icon-container icon-container-red d-flex align-items-center justify-content-center'>
@@ -262,7 +262,7 @@ export default function SentimentOverview({ userData }) {
                 </div>
               </Card>
             </Col>
-            <Col xs={3}>
+            <Col xs={6} lg={3}>
               <Card className='overview-card-box'>
                 <div className='d-flex card-wrapper align-items-center'>
                   <div className='icon-container icon-container-blue d-flex align-items-center justify-content-center'>
@@ -286,8 +286,8 @@ export default function SentimentOverview({ userData }) {
             </Col>
           </Row>
           <Row>
-            <Col xs={4}>
-              <div className='overview-barchart-wrapper'>
+            <Col xs={12} className='justify-content-xs-center'>
+              <div className='overview-barchart-wrapper justify-content-xs-center'>
                 <BarChart
                   posPercentage={posPercentage}
                   negPercentage={negPercentage}
@@ -295,7 +295,7 @@ export default function SentimentOverview({ userData }) {
                 />
               </div>
             </Col>
-            <Col xs={8}>
+            <Col xs={12}>
               <div className='overview-linechart-wrapper'>
                 <SentimentLineChart posts={datePosts} />
               </div>
@@ -338,7 +338,7 @@ export default function SentimentOverview({ userData }) {
             </Col>
           </Row>
           <Row>
-            <Col xs={6} className='d-flex flex-wrap'>
+            <Col xs={12} lg={6} className='d-flex flex-wrap'>
               <Col className='tag-column' xs={6}>
                 <Card className='overview-card-box'>
                   <div className='d-flex card-wrapper align-items-center'>
@@ -488,15 +488,6 @@ export default function SentimentOverview({ userData }) {
           </Row>
         </div>
       </div>
-
-      {/* <Row>
-        <img
-          className='graph'
-          style={{ marginTop: '20px', width: '1200px' }}
-          src={graph}
-          alt='app logo'
-        />
-      </Row> */}
     </Container>
   );
 }

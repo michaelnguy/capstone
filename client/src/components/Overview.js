@@ -92,7 +92,7 @@ export default function Overview() {
         </div>
       </Row>
       <Row>
-        <Col xs={3}>
+        <Col xs={6} lg={3}>
           <Card className='card-box'>
             <div className='d-flex card-wrapper align-items-center'>
               <div className='icon-container icon-container-purple d-flex align-items-center justify-content-center'>
@@ -115,7 +115,7 @@ export default function Overview() {
             </div>
           </Card>
         </Col>
-        <Col xs={3}>
+        <Col xs={6} lg={3}>
           <Card className='card-box'>
             <div className='d-flex card-wrapper align-items-center'>
               <div className='icon-container icon-container-blue d-flex align-items-center justify-content-center'>
@@ -130,7 +130,7 @@ export default function Overview() {
             </div>
           </Card>
         </Col>
-        <Col xs={3}>
+        <Col xs={6} lg={3}>
           <Card className='card-box'>
             <div className='d-flex card-wrapper align-items-center'>
               <div className='icon-container icon-container-orange d-flex align-items-center justify-content-center'>
@@ -145,7 +145,7 @@ export default function Overview() {
             </div>
           </Card>
         </Col>
-        <Col xs={3}>
+        <Col xs={6} lg={3}>
           <Card className='card-box'>
             <div className='d-flex card-wrapper align-items-center'>
               <div className='icon-container icon-container-green d-flex align-items-center justify-content-center'>
