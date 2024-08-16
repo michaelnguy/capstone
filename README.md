@@ -94,7 +94,7 @@ pip install -r requirements.txt
 flask –app app.py run
 ```
 
-#### Hashtag_rec
+#### Hashtag Recommendation
 
 ```sh
 cd hashtag_rec
@@ -117,18 +117,43 @@ Step 2: Get image
 
 ````
 from image_utils import get_image_from_url
+img_url = "https://live.staticflickr.com/7707/16525630273_09bd1f9bf3_n.jpg"
 img = get_image_from_url(img_url)
 ````
 
 Step 3: Call recommender
 ````
-recommender.get_tags_for_image(img, img_vectorizer)
-
 # by default, recommend 5 tags per image
+recommender.get_tags_for_image(img, img_vectorizer, num_tags=5)
+````
+
+Get list of recommended tags per image
+````
 [['sunset', 'sea', 'beach', 'landscape', 'nature']]
 ````
 
-See the notebook `hashtag_recommender.ipynb` in `hashtag_rec` directory for more methods to generate hashtag recommendations.
+You can get tag recommendations for multiple images at a time
+
+````
+another_img_url = "http://www.ouichefnetwork.com/images/old/6a01156ed76240970c0133f3862f7c970b-800wi.jpg"
+another_img = get_image_from_url(another_img_url)
+````
+
+![](http://www.ouichefnetwork.com/images/old/6a01156ed76240970c0133f3862f7c970b-800wi.jpg)
+
+Call recommender for both images
+
+````
+recommender.get_tags_for_image([img, another_img], img_vectorizer)
+````
+
+Get list of recommended tags per image
+````
+[['sunset', 'sea', 'beach', 'landscape', 'nature'],
+ ['cake', 'baking', 'foodporn', 'chocolate', 'spring']]
+````
+
+See the notebook [hashtag_recommender.ipynb](https://github.com/michaelnguy/capstone/blob/main/hashtag_rec/hashtag_recommender.ipynb) in `hashtag_rec` directory for more methods to generate hashtag recommendations.
 
 #### Sentiment Model
 
