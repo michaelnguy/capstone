@@ -16,14 +16,16 @@ This repo consists of 5 separate directories: a React web client, a Node.js back
 
 2. Unzip the folder and copy its contents to the preexisting empty HARRISON folder.
 
-3. Download data_embeddings.txt and data_indices_split.json from their drive links (links only available to University of Michigan accounts).
-   [link 1](https://drive.google.com/file/d/1c18eQKmcgY3HwACJOYC52G0lAPFpp_jf/view?usp=drive_link)
-   [link 2](https://drive.google.com/file/d/1wfr-n5yh-dQSHu_N67psG7QDEIlvLJP6/view?usp=drive_link)
+3. Download the following files from their drive links (links only available to University of Michigan accounts).
+   - [clip_tag_embs.txt](https://drive.google.com/file/d/1aLi0V5lnTdeB426EgP8fHSamglmC_kdU/view?usp=drive_link)
+   - [data_embeddings.txt](https://drive.google.com/file/d/1c18eQKmcgY3HwACJOYC52G0lAPFpp_jf/view?usp=drive_link)
+   - [data_indices_split.json](https://drive.google.com/file/d/1efRcJD-I3Ph7-u2Mw5IBVqSsW_noydeV/view?usp=drive_link)
 
 4. The final HARRISON folder should consist of:
 
 ```
     instagram_dataset/
+    clip_tag_embs.txt
     data_embeddings.txt
     data_indices_split.json
     data_list.txt
