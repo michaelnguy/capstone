@@ -3,9 +3,10 @@ https://drive.google.com/file/d/1m3u0vVw-DzaVsQNvyW_PtbMKZjzEAsC2/view?usp=shari
 
 2. Copy the contents of the unzipped HARRISON folder to this directory.
 
-3. Download data_embeddings.txt and data_indices_split.json from their drive links (links only available to University of Michigan accounts).
+3. Download clip_tag_ems.txt, data_embeddings.txt and data_indices_split.json from their drive links (links only available to University of Michigan accounts).
+https://drive.google.com/file/d/1aLi0V5lnTdeB426EgP8fHSamglmC_kdU/view?usp=drive_link
 https://drive.google.com/file/d/1c18eQKmcgY3HwACJOYC52G0lAPFpp_jf/view?usp=drive_link
-https://drive.google.com/file/d/1wfr-n5yh-dQSHu_N67psG7QDEIlvLJP6/view?usp=drive_link
+https://drive.google.com/file/d/1efRcJD-I3Ph7-u2Mw5IBVqSsW_noydeV/view?usp=drive_link
 
 4. The final HARRISON folder should consist of:
     instagram_dataset/
@@ -13,3 +14,4 @@ https://drive.google.com/file/d/1wfr-n5yh-dQSHu_N67psG7QDEIlvLJP6/view?usp=drive
     data_indices_split.json
     data_list.txt
     tag_list.txt
+    clip_tag_embs.txt
