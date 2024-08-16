@@ -3,4 +3,5 @@ pandas
 torch
 torchvision
 transformers
+sentence-transformers
 faiss-cpu
