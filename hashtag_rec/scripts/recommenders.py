@@ -208,6 +208,7 @@ class LlavaTagRecommender:
     """
 
     DEFAULT_LLAVA_PROMPT = "USER: <image>\nWhat are {} hashtags to describe this image? ASSISTANT:"
+    NUM_TOKENS_PER_TAG = 10
     TAG_REGEX = r"#([\w]+)"
 
     def __init__(self, postprocessor=None, num_rec_tags=5, use_clip_scores=False):
@@ -232,7 +233,7 @@ class LlavaTagRecommender:
             model_prompt = self.DEFAULT_LLAVA_PROMPT
         model_prompt = model_prompt.format(num_tags)
 
-        generated_llava_text = self._call_llava_model(img, model_prompt, num_new_tokens=5*num_tags)
+        generated_llava_text = self._call_llava_model(img, model_prompt, num_new_tokens=self.NUM_TOKENS_PER_TAG*num_tags)
         
         if self.postprocessor is not None:
             generated_tags = self.postprocessor(generated_llava_text, model_prompt)
@@ -258,7 +259,7 @@ class LlavaTagRecommender:
         self.llava_model = LlavaForConditionalGeneration.from_pretrained(LLAVA_MODEL_NAME)
         print("Finished loading llava model")
     
-    def _call_llava_model(self, images, prompt, num_new_tokens=5):
+    def _call_llava_model(self, images, prompt, num_new_tokens):
         # preprocess images
         inputs = self.llava_processor(text=prompt, images=images, return_tensors="pt")
         # call llava
