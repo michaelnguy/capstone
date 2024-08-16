@@ -16,14 +16,16 @@ This repo consists of 5 separate directories: a React web client, a Node.js back
 
 2. Unzip the folder and copy its contents to the preexisting empty HARRISON folder.
 
-3. Download data_embeddings.txt and data_indices_split.json from their drive links (links only available to University of Michigan accounts).
-   [link 1](https://drive.google.com/file/d/1c18eQKmcgY3HwACJOYC52G0lAPFpp_jf/view?usp=drive_link)
-   [link 2](https://drive.google.com/file/d/1wfr-n5yh-dQSHu_N67psG7QDEIlvLJP6/view?usp=drive_link)
+3. Download the following files from their drive links (links only available to University of Michigan accounts).
+   - [clip_tag_embs.txt](https://drive.google.com/file/d/1aLi0V5lnTdeB426EgP8fHSamglmC_kdU/view?usp=drive_link)
+   - [data_embeddings.txt](https://drive.google.com/file/d/1c18eQKmcgY3HwACJOYC52G0lAPFpp_jf/view?usp=drive_link)
+   - [data_indices_split.json](https://drive.google.com/file/d/1efRcJD-I3Ph7-u2Mw5IBVqSsW_noydeV/view?usp=drive_link)
 
 4. The final HARRISON folder should consist of:
 
 ```
     instagram_dataset/
+    clip_tag_embs.txt
     data_embeddings.txt
     data_indices_split.json
     data_list.txt
@@ -92,12 +94,66 @@ pip install -r requirements.txt
 flask –app app.py run
 ```
 
-#### Hashtag_rec
+#### Hashtag Recommendation
 
 ```sh
 cd hashtag_rec
-pip install -r /scripts/requirements.txt
+pip install -r ./scripts/requirements.txt
 ```
+
+**Getting recommended tags**
+
+Step 1: Set up recommender
+````
+from recommenders import ImageIndexTagRecommender
+
+recommender = ImageIndexTagRecommender(img_index, train_idx_mapping, tags_list)
+img_vectorizer = get_image_vectorizer_for_recommender()
+````
+
+Step 2: Get image
+
+![](https://live.staticflickr.com/7707/16525630273_09bd1f9bf3_n.jpg)
+
+````
+from image_utils import get_image_from_url
+img_url = "https://live.staticflickr.com/7707/16525630273_09bd1f9bf3_n.jpg"
+img = get_image_from_url(img_url)
+````
+
+Step 3: Call recommender
+````
+# by default, recommend 5 tags per image
+recommender.get_tags_for_image(img, img_vectorizer, num_tags=5)
+````
+
+Get list of recommended tags per image
+````
+[['sunset', 'sea', 'beach', 'landscape', 'nature']]
+````
+
+You can get tag recommendations for multiple images at a time
+
+````
+another_img_url = "http://www.ouichefnetwork.com/images/old/6a01156ed76240970c0133f3862f7c970b-800wi.jpg"
+another_img = get_image_from_url(another_img_url)
+````
+
+![](http://www.ouichefnetwork.com/images/old/6a01156ed76240970c0133f3862f7c970b-800wi.jpg)
+
+Call recommender for both images
+
+````
+recommender.get_tags_for_image([img, another_img], img_vectorizer)
+````
+
+Get list of recommended tags per image
+````
+[['sunset', 'sea', 'beach', 'landscape', 'nature'],
+ ['cake', 'baking', 'foodporn', 'chocolate', 'spring']]
+````
+
+See the notebook [hashtag_recommender.ipynb](https://github.com/michaelnguy/capstone/blob/main/hashtag_rec/hashtag_recommender.ipynb) in `hashtag_rec` directory for more methods to generate hashtag recommendations.
 
 #### Sentiment Model
 

@@ -1,5 +1,5 @@
 # data constants
-DATA_DIR = "./data" # REPLACE THIS with the directory path that you stored the HARRISON dataset in
+DATA_DIR = "./HARRISON" # REPLACE THIS with the directory path that you stored the HARRISON dataset in
 DATA_LEN = 57383
 
 # file path constants
